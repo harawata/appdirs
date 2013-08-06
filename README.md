@@ -7,10 +7,10 @@ AppDirs is a small java library which provides a path to the platform dependent 
 
 For example, here are the common paths of the folder/directory that is used to store application specific user data on each platform.
 
-On Mac OS X : ```/Users/<Account>/Library/Application Support/<AppName>``` 
-On Windows XP : ```C:\Documents and Settings\<Account>\Application Data\Local Settings\<AppAuthor>\<AppName>``` 
-On Windows 7 : ```C:\Users\<Account>\AppData\<AppAuthor>\<AppName>``` 
-On Unix/Linux : ```/home/<account>/.local/share/<AppName>``` 
+On Mac OS X : ```/Users/<Account>/Library/Application Support/<AppName>```  
+On Windows XP : ```C:\Documents and Settings\<Account>\Application Data\Local Settings\<AppAuthor>\<AppName>```  
+On Windows 7 : ```C:\Users\<Account>\AppData\<AppAuthor>\<AppName>```  
+On Unix/Linux : ```/home/<account>/.local/share/<AppName>```  
 
 With __AppDirs__, you can get the path depending on the runtime platform with the following code.
 
@@ -63,7 +63,7 @@ public class AppDirTest {
 }
 ```
 
-Output on Mac OS X (username = ave)
+### Output on Mac OS X (username = ave)
 
 ```
 User data dir: /Users/ave/Library/Application Support/myapp/1.2.3
@@ -77,9 +77,10 @@ Site data dir (multi path): /Library/Application Support/myapp/1.2.3
 Site config dir: /Library/Application Support/myapp/1.2.3
 Site config dir (multi path): /Library/Application Support/myapp/1.2.3
 ```
-_roaming_ and _multiPath_ parameter has no effect on Mac OS X.
+- _appAuthor_ parameter has not used on Mac OS X.
+- _roaming_ and _multiPath_ parameters have no effect on Mac OS X.
 
-Output on Windows 7 (username = ave)
+### Output on Windows 7 (username = ave)
 ```
 User data dir: C:\Users\ave\AppData\Local\harawata\myapp\1.2.3
 User data dir (roaming): C:\Users\ave\AppData\Roaming\harawata\myapp\1.2.3
@@ -92,9 +93,10 @@ Site data dir (multi path): C:\ProgramData\harawata\myapp\1.2.3
 Site config dir: C:\ProgramData\harawata\myapp\1.2.3
 Site config dir (multi path): C:\ProgramData\harawata\myapp\1.2.3
 ```
-_multiPath_ parameter has no effect on Windows.
+- Internally calls [SHGetFolderPath](http://msdn.microsoft.com/en-us/library/bb762181%28VS.85%29.aspx) via [Java Native Access (JNA)](https://github.com/twall/jna).
+- _multiPath_ parameter has no effect on Windows.
 
-Output on Linux (username = ave, with no XDG environment variables defined)
+### Output on Linux (username = ave, with no XDG environment variables defined)
 ```
 User data dir: /home/ave/.local/share/myapp/1.2.3
 User data dir (roaming): /home/ave/.local/share/myapp/1.2.3
@@ -107,7 +109,9 @@ Site data dir (multi path): /usr/local/share/myapp/1.2.3:/usr/share/myapp/1.2.3
 Site config dir: /etc/xdg/myapp/1.2.3
 Site config dir (multi path): /etc/xdg/myapp/1.2.3
 ```
-_roaming_ parameter has no effect on Unix/Linux.
+- __AppDirs__ respects [XDG Base Directory Specification](http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html)
+- _appAuthor_ parameter has not used on Unix/Linux.
+- _roaming_ parameter has no effect on Unix/Linux.
 
 ## Requirements
 
