@@ -3,7 +3,7 @@ AppDirs
 
 ## Overview
 
-AppDirs is a small java library which provides a path to the platform dependent special folder/directory. 
+__AppDirs__ is a small java library which provides a path to the platform dependent special folder/directory. 
 
 For example, here are the common paths of the folder/directory that is used to store application specific user data on each platform.
 
@@ -18,7 +18,8 @@ With __AppDirs__, you can get the path depending on the runtime platform with th
 AppDirs appDirs = AppDirsFactory.getInstance();
 appDirs.getUserDataDir("<AppName>", null, "<AppAuthor>");
 ```
-__AppDirs__ is loosely based on [a python module](https://github.com/ActiveState/appdirs) with the same name.
+__AppDirs__ is loosely based on [a python module](https://github.com/ActiveState/appdirs) with the same name.  
+Please use the issue tracker for bug reports or suggestions.
 
 ## Supported directories.
 
@@ -77,7 +78,7 @@ Site data dir (multi path): /Library/Application Support/myapp/1.2.3
 Site config dir: /Library/Application Support/myapp/1.2.3
 Site config dir (multi path): /Library/Application Support/myapp/1.2.3
 ```
-- _appAuthor_ parameter has not used on Mac OS X.
+- _appAuthor_ parameter is not used on Mac OS X.
 - _roaming_ and _multiPath_ parameters have no effect on Mac OS X.
 
 ### Output on Windows 7 (username = ave)
@@ -109,8 +110,8 @@ Site data dir (multi path): /usr/local/share/myapp/1.2.3:/usr/share/myapp/1.2.3
 Site config dir: /etc/xdg/myapp/1.2.3
 Site config dir (multi path): /etc/xdg/myapp/1.2.3
 ```
-- __AppDirs__ respects [XDG Base Directory Specification](http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html)
-- _appAuthor_ parameter has not used on Unix/Linux.
+- __AppDirs__ respects [XDG Base Directory Specification](http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html).
+- _appAuthor_ parameter is not used on Unix/Linux.
 - _roaming_ parameter has no effect on Unix/Linux.
 
 ## Requirements
