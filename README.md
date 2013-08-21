@@ -95,6 +95,8 @@ Site config dir: C:\ProgramData\harawata\myapp\1.2.3
 Site config dir (multi path): C:\ProgramData\harawata\myapp\1.2.3
 ```
 - Internally calls [SHGetFolderPath](http://msdn.microsoft.com/en-us/library/bb762181%28VS.85%29.aspx) via [Java Native Access (JNA)](https://github.com/twall/jna).
+ - Returns CSIDL_LOCAL_APPDATA or CSIDL_APPDATA for user directories.
+ - Returns CSIDL_COMMON_APPDATA for site directories.
 - _multiPath_ parameter has no effect on Windows.
 
 ### Output on Linux (username = ave, with no XDG environment variables defined)
@@ -110,7 +112,12 @@ Site data dir (multi path): /usr/local/share/myapp/1.2.3:/usr/share/myapp/1.2.3
 Site config dir: /etc/xdg/myapp/1.2.3
 Site config dir (multi path): /etc/xdg/myapp/1.2.3
 ```
-- __AppDirs__ respects [XDG Base Directory Specification](http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html).
+- __AppDirs__ respects [XDG Base Directory Specification](http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html) if variables are defined.
+ - Returns XDG_DATA_HOME for user data directory.
+ - Returns XDG_CONFIG_HOME for user config directory.
+ - Returns XDG_CACHE_HOME for user cache directory.
+ - Returns XDG_DATA_DIRS for site data directory.
+ - Returns XDG_CONFIG_DIRS for site config directory.
 - _appAuthor_ parameter is not used on Unix/Linux.
 - _roaming_ parameter has no effect on Unix/Linux.
 
