@@ -123,7 +123,11 @@ Site config dir (multi path): /etc/xdg/myapp/1.2.3
 
 ## Requirements
 
-__AppDirs__ requires J2SE 5.0 or later and [Java Native Access (JNA)](https://github.com/twall/jna) as its dependency.
+__AppDirs__ requires Java SE 6 or later and [Java Native Access (JNA)](https://github.com/twall/jna) as its dependency.
+
+## Bug report, feature request, question.
+
+Please create an issue on the [tracker](https://github.com/harawata/appdirs/issues).
 
 ## License
 
