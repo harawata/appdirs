@@ -16,44 +16,39 @@ package net.harawata.appdirs.impl;
 
 import net.harawata.appdirs.AppDirs;
 
-public class MacOSXAppDirs extends AppDirs
-{
-	public MacOSXAppDirs()
-	{
-		super();
-	}
+public class MacOSXAppDirs extends AppDirs {
+  public MacOSXAppDirs() {
+    super();
+  }
 
-	public String getUserDataDir(String appName, String appVersion, String appAuthor,
-		boolean roaming)
-	{
-		return buildPath(home(), "/Library/Application Support", appName, appVersion);
-	}
+  public String getUserDataDir(String appName, String appVersion,
+      String appAuthor, boolean roaming) {
+    return buildPath(home(), "/Library/Application Support", appName,
+        appVersion);
+  }
 
-	public String getUserConfigDir(String appName, String appVersion, String appAuthor,
-		boolean roaming)
-	{
-		return getUserDataDir(appName, appVersion, appAuthor, roaming);
-	}
+  public String getUserConfigDir(String appName, String appVersion,
+      String appAuthor, boolean roaming) {
+    return getUserDataDir(appName, appVersion, appAuthor, roaming);
+  }
 
-	public String getUserCacheDir(String appName, String appVersion, String appAuthor)
-	{
-		return buildPath(home(), "/Library/Caches", appName, appVersion);
-	}
+  public String getUserCacheDir(String appName, String appVersion,
+      String appAuthor) {
+    return buildPath(home(), "/Library/Caches", appName, appVersion);
+  }
 
-	public String getSiteDataDir(String appName, String appVersion, String appAuthor,
-		boolean multiPath)
-	{
-		return buildPath("/Library/Application Support", appName, appVersion);
-	}
+  public String getSiteDataDir(String appName, String appVersion,
+      String appAuthor, boolean multiPath) {
+    return buildPath("/Library/Application Support", appName, appVersion);
+  }
 
-	public String getSiteConfigDir(String appName, String appVersion, String appAuthor,
-		boolean multiPath)
-	{
-		return getSiteDataDir(appName, appVersion, appAuthor, multiPath);
-	}
+  public String getSiteConfigDir(String appName, String appVersion,
+      String appAuthor, boolean multiPath) {
+    return getSiteDataDir(appName, appVersion, appAuthor, multiPath);
+  }
 
-	public String getUserLogDir(String appName, String appVersion, String appAuthor)
-	{
-		return buildPath(home(), "/Library/Logs", appName, appVersion);
-	}
+  public String getUserLogDir(String appName, String appVersion,
+      String appAuthor) {
+    return buildPath(home(), "/Library/Logs", appName, appVersion);
+  }
 }

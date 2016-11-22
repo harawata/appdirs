@@ -27,37 +27,36 @@ import com.sun.jna.platform.win32.W32Errors;
 import com.sun.jna.platform.win32.WinDef;
 import com.sun.jna.platform.win32.WinNT.HRESULT;
 
-public class ShellFolderResolver implements WindowsFolderResolver
-{
-	private static final Logger logger = LoggerFactory.getLogger(ShellFolderResolver.class);
+public class ShellFolderResolver implements WindowsFolderResolver {
+  private static final Logger logger = LoggerFactory
+      .getLogger(ShellFolderResolver.class);
 
-	public String resolveFolder(FolderId folderId)
-	{
-		int folder = convertFolderId(folderId);
+  public String resolveFolder(FolderId folderId) {
+    int folder = convertFolderId(folderId);
 
-		char[] pszPath = new char[WinDef.MAX_PATH];
-		HRESULT result = Shell32.INSTANCE.SHGetFolderPath(null, folder, null, null, pszPath);
-		if (W32Errors.S_OK.equals(result))
-		{
-			return Native.toString(pszPath);
-		}
+    char[] pszPath = new char[WinDef.MAX_PATH];
+    HRESULT result = Shell32.INSTANCE.SHGetFolderPath(null, folder, null, null,
+        pszPath);
+    if (W32Errors.S_OK.equals(result)) {
+      return Native.toString(pszPath);
+    }
 
-		logger.error("SHGetFolderPath returns an error: {}", result.intValue());
-		throw new AppDirsException("SHGetFolderPath returns an error: " + result.intValue());
-	}
+    logger.error("SHGetFolderPath returns an error: {}", result.intValue());
+    throw new AppDirsException(
+        "SHGetFolderPath returns an error: " + result.intValue());
+  }
 
-	protected int convertFolderId(FolderId folderId)
-	{
-		switch (folderId)
-		{
-			case APPDATA:
-				return ShlObj.CSIDL_APPDATA;
-			case LOCAL_APPDATA:
-				return ShlObj.CSIDL_LOCAL_APPDATA;
-			case COMMON_APPDATA:
-				return ShlObj.CSIDL_COMMON_APPDATA;
-			default:
-				throw new AppDirsException("Unknown folder ID " + folderId + " was specified.");
-		}
-	}
+  protected int convertFolderId(FolderId folderId) {
+    switch (folderId) {
+    case APPDATA:
+      return ShlObj.CSIDL_APPDATA;
+    case LOCAL_APPDATA:
+      return ShlObj.CSIDL_LOCAL_APPDATA;
+    case COMMON_APPDATA:
+      return ShlObj.CSIDL_COMMON_APPDATA;
+    default:
+      throw new AppDirsException(
+          "Unknown folder ID " + folderId + " was specified.");
+    }
+  }
 }

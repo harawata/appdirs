@@ -17,20 +17,18 @@ package net.harawata.appdirs.impl;
 import net.harawata.appdirs.AppDirsException;
 import net.harawata.appdirs.impl.WindowsAppDirs.FolderId;
 
-public class MockWindowsFolderResolver implements WindowsFolderResolver
-{
-	public String resolveFolder(FolderId folderId)
-	{
-		switch (folderId)
-		{
-			case APPDATA:
-				return "C:\\Documents and Settings\\harawata\\Application Data";
-			case LOCAL_APPDATA:
-				return "C:\\Documents and Settings\\harawata\\Local Settings\\Application Data";
-			case COMMON_APPDATA:
-				return "C:\\Documents and Settings\\All Users\\Application Data";
-			default:
-				throw new AppDirsException("Unknown folder ID " + folderId + " was specified.");
-		}
-	}
+public class MockWindowsFolderResolver implements WindowsFolderResolver {
+  public String resolveFolder(FolderId folderId) {
+    switch (folderId) {
+    case APPDATA:
+      return "C:\\Documents and Settings\\harawata\\Application Data";
+    case LOCAL_APPDATA:
+      return "C:\\Documents and Settings\\harawata\\Local Settings\\Application Data";
+    case COMMON_APPDATA:
+      return "C:\\Documents and Settings\\All Users\\Application Data";
+    default:
+      throw new AppDirsException(
+          "Unknown folder ID " + folderId + " was specified.");
+    }
+  }
 }

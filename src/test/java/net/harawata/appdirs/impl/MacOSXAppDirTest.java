@@ -23,151 +23,146 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class MacOSXAppDirTest
-{
-	private static String origOs;
+public class MacOSXAppDirTest {
+  private static String origOs;
 
-	private static String origHome;
+  private static String origHome;
 
-	private static String origFileSeparator;
+  private static String origFileSeparator;
 
-	private AppDirs appDirs;
+  private AppDirs appDirs;
 
-	@BeforeClass
-	public static void setUp()
-	{
-		origOs = System.setProperty(AppDirs.OS_NAME, "Mac OS X");
-		origHome = System.setProperty(AppDirs.USER_HOME, "/Users/somebody");
-		origFileSeparator = System.setProperty(AppDirs.FILE_SEPARATOR, "/");
-	}
+  @BeforeClass
+  public static void setUp() {
+    origOs = System.setProperty(AppDirs.OS_NAME, "Mac OS X");
+    origHome = System.setProperty(AppDirs.USER_HOME, "/Users/somebody");
+    origFileSeparator = System.setProperty(AppDirs.FILE_SEPARATOR, "/");
+  }
 
-	@Before
-	public void pre()
-	{
-		appDirs = AppDirsFactory.getInstance();
-	}
+  @Before
+  public void pre() {
+    appDirs = AppDirsFactory.getInstance();
+  }
 
-	@Test
-	public void testGetUserDataDir()
-	{
-		assertEquals("/Users/somebody/Library/Application Support",
-			appDirs.getUserDataDir(null, null, null));
-		assertEquals("/Users/somebody/Library/Application Support",
-			appDirs.getUserDataDir(null, null, null, true));
-		assertEquals("/Users/somebody/Library/Application Support/myapp",
-			appDirs.getUserDataDir("myapp", null, null));
-		assertEquals("/Users/somebody/Library/Application Support/myapp",
-			appDirs.getUserDataDir("myapp", null, null, true));
-		assertEquals("/Users/somebody/Library/Application Support/myapp/1.2.3",
-			appDirs.getUserDataDir("myapp", "1.2.3", null));
-		assertEquals("/Users/somebody/Library/Application Support/myapp/1.2.3",
-			appDirs.getUserDataDir("myapp", "1.2.3", null, true));
-		assertEquals("/Users/somebody/Library/Application Support/myapp/1.2.3",
-			appDirs.getUserDataDir("myapp", "1.2.3", "harawata"));
-		assertEquals("/Users/somebody/Library/Application Support/myapp/1.2.3",
-			appDirs.getUserDataDir("myapp", "1.2.3", "harawata", true));
-	}
+  @Test
+  public void testGetUserDataDir() {
+    assertEquals("/Users/somebody/Library/Application Support",
+        appDirs.getUserDataDir(null, null, null));
+    assertEquals("/Users/somebody/Library/Application Support",
+        appDirs.getUserDataDir(null, null, null, true));
+    assertEquals("/Users/somebody/Library/Application Support/myapp",
+        appDirs.getUserDataDir("myapp", null, null));
+    assertEquals("/Users/somebody/Library/Application Support/myapp",
+        appDirs.getUserDataDir("myapp", null, null, true));
+    assertEquals("/Users/somebody/Library/Application Support/myapp/1.2.3",
+        appDirs.getUserDataDir("myapp", "1.2.3", null));
+    assertEquals("/Users/somebody/Library/Application Support/myapp/1.2.3",
+        appDirs.getUserDataDir("myapp", "1.2.3", null, true));
+    assertEquals("/Users/somebody/Library/Application Support/myapp/1.2.3",
+        appDirs.getUserDataDir("myapp", "1.2.3", "harawata"));
+    assertEquals("/Users/somebody/Library/Application Support/myapp/1.2.3",
+        appDirs.getUserDataDir("myapp", "1.2.3", "harawata", true));
+  }
 
-	@Test
-	public void testGetUserConfigDir()
-	{
-		assertEquals("/Users/somebody/Library/Application Support",
-			appDirs.getUserConfigDir(null, null, null));
-		assertEquals("/Users/somebody/Library/Application Support",
-			appDirs.getUserConfigDir(null, null, null, true));
-		assertEquals("/Users/somebody/Library/Application Support/myapp",
-			appDirs.getUserConfigDir("myapp", null, null));
-		assertEquals("/Users/somebody/Library/Application Support/myapp",
-			appDirs.getUserConfigDir("myapp", null, null, true));
-		assertEquals("/Users/somebody/Library/Application Support/myapp/1.2.3",
-			appDirs.getUserConfigDir("myapp", "1.2.3", null));
-		assertEquals("/Users/somebody/Library/Application Support/myapp/1.2.3",
-			appDirs.getUserConfigDir("myapp", "1.2.3", null, true));
-		assertEquals("/Users/somebody/Library/Application Support/myapp/1.2.3",
-			appDirs.getUserConfigDir("myapp", "1.2.3", "harawata"));
-		assertEquals("/Users/somebody/Library/Application Support/myapp/1.2.3",
-			appDirs.getUserConfigDir("myapp", "1.2.3", "harawata", true));
-	}
+  @Test
+  public void testGetUserConfigDir() {
+    assertEquals("/Users/somebody/Library/Application Support",
+        appDirs.getUserConfigDir(null, null, null));
+    assertEquals("/Users/somebody/Library/Application Support",
+        appDirs.getUserConfigDir(null, null, null, true));
+    assertEquals("/Users/somebody/Library/Application Support/myapp",
+        appDirs.getUserConfigDir("myapp", null, null));
+    assertEquals("/Users/somebody/Library/Application Support/myapp",
+        appDirs.getUserConfigDir("myapp", null, null, true));
+    assertEquals("/Users/somebody/Library/Application Support/myapp/1.2.3",
+        appDirs.getUserConfigDir("myapp", "1.2.3", null));
+    assertEquals("/Users/somebody/Library/Application Support/myapp/1.2.3",
+        appDirs.getUserConfigDir("myapp", "1.2.3", null, true));
+    assertEquals("/Users/somebody/Library/Application Support/myapp/1.2.3",
+        appDirs.getUserConfigDir("myapp", "1.2.3", "harawata"));
+    assertEquals("/Users/somebody/Library/Application Support/myapp/1.2.3",
+        appDirs.getUserConfigDir("myapp", "1.2.3", "harawata", true));
+  }
 
-	@Test
-	public void testGetUserCacheDir()
-	{
-		assertEquals("/Users/somebody/Library/Caches", appDirs.getUserCacheDir(null, null, null));
-		assertEquals("/Users/somebody/Library/Caches/myapp",
-			appDirs.getUserCacheDir("myapp", null, null));
-		assertEquals("/Users/somebody/Library/Caches/myapp/1.2.3",
-			appDirs.getUserCacheDir("myapp", "1.2.3", null));
-		assertEquals("/Users/somebody/Library/Caches/myapp/1.2.3",
-			appDirs.getUserCacheDir("myapp", "1.2.3", "harawata"));
-	}
+  @Test
+  public void testGetUserCacheDir() {
+    assertEquals("/Users/somebody/Library/Caches",
+        appDirs.getUserCacheDir(null, null, null));
+    assertEquals("/Users/somebody/Library/Caches/myapp",
+        appDirs.getUserCacheDir("myapp", null, null));
+    assertEquals("/Users/somebody/Library/Caches/myapp/1.2.3",
+        appDirs.getUserCacheDir("myapp", "1.2.3", null));
+    assertEquals("/Users/somebody/Library/Caches/myapp/1.2.3",
+        appDirs.getUserCacheDir("myapp", "1.2.3", "harawata"));
+  }
 
-	@Test
-	public void testGetUserLogDir()
-	{
-		assertEquals("/Users/somebody/Library/Logs", appDirs.getUserLogDir(null, null, null));
-		assertEquals("/Users/somebody/Library/Logs/myapp",
-			appDirs.getUserLogDir("myapp", null, null));
-		assertEquals("/Users/somebody/Library/Logs/myapp/1.2.3",
-			appDirs.getUserLogDir("myapp", "1.2.3", null));
-		assertEquals("/Users/somebody/Library/Logs/myapp/1.2.3",
-			appDirs.getUserLogDir("myapp", "1.2.3", "harawata"));
-	}
+  @Test
+  public void testGetUserLogDir() {
+    assertEquals("/Users/somebody/Library/Logs",
+        appDirs.getUserLogDir(null, null, null));
+    assertEquals("/Users/somebody/Library/Logs/myapp",
+        appDirs.getUserLogDir("myapp", null, null));
+    assertEquals("/Users/somebody/Library/Logs/myapp/1.2.3",
+        appDirs.getUserLogDir("myapp", "1.2.3", null));
+    assertEquals("/Users/somebody/Library/Logs/myapp/1.2.3",
+        appDirs.getUserLogDir("myapp", "1.2.3", "harawata"));
+  }
 
-	@Test
-	public void testSiteDataDir()
-	{
-		assertEquals("/Library/Application Support", appDirs.getSiteDataDir(null, null, null));
-		assertEquals("/Library/Application Support", appDirs.getSiteDataDir(null, null, null, true));
-		assertEquals("/Library/Application Support/myapp",
-			appDirs.getSiteDataDir("myapp", null, null));
-		assertEquals("/Library/Application Support/myapp",
-			appDirs.getSiteDataDir("myapp", null, null, true));
-		assertEquals("/Library/Application Support/myapp/1.2.3",
-			appDirs.getSiteDataDir("myapp", "1.2.3", null));
-		assertEquals("/Library/Application Support/myapp/1.2.3",
-			appDirs.getSiteDataDir("myapp", "1.2.3", null, true));
-		assertEquals("/Library/Application Support/myapp/1.2.3",
-			appDirs.getSiteDataDir("myapp", "1.2.3", "harawata"));
-		assertEquals("/Library/Application Support/myapp/1.2.3",
-			appDirs.getSiteDataDir("myapp", "1.2.3", "harawata", true));
-	}
+  @Test
+  public void testSiteDataDir() {
+    assertEquals("/Library/Application Support",
+        appDirs.getSiteDataDir(null, null, null));
+    assertEquals("/Library/Application Support",
+        appDirs.getSiteDataDir(null, null, null, true));
+    assertEquals("/Library/Application Support/myapp",
+        appDirs.getSiteDataDir("myapp", null, null));
+    assertEquals("/Library/Application Support/myapp",
+        appDirs.getSiteDataDir("myapp", null, null, true));
+    assertEquals("/Library/Application Support/myapp/1.2.3",
+        appDirs.getSiteDataDir("myapp", "1.2.3", null));
+    assertEquals("/Library/Application Support/myapp/1.2.3",
+        appDirs.getSiteDataDir("myapp", "1.2.3", null, true));
+    assertEquals("/Library/Application Support/myapp/1.2.3",
+        appDirs.getSiteDataDir("myapp", "1.2.3", "harawata"));
+    assertEquals("/Library/Application Support/myapp/1.2.3",
+        appDirs.getSiteDataDir("myapp", "1.2.3", "harawata", true));
+  }
 
-	@Test
-	public void testSiteConfigDir()
-	{
-		assertEquals("/Library/Application Support", appDirs.getSiteConfigDir(null, null, null));
-		assertEquals("/Library/Application Support",
-			appDirs.getSiteConfigDir(null, null, null, true));
-		assertEquals("/Library/Application Support/myapp",
-			appDirs.getSiteConfigDir("myapp", null, null));
-		assertEquals("/Library/Application Support/myapp",
-			appDirs.getSiteConfigDir("myapp", null, null, true));
-		assertEquals("/Library/Application Support/myapp/1.2.3",
-			appDirs.getSiteConfigDir("myapp", "1.2.3", null));
-		assertEquals("/Library/Application Support/myapp/1.2.3",
-			appDirs.getSiteConfigDir("myapp", "1.2.3", null, true));
-		assertEquals("/Library/Application Support/myapp/1.2.3",
-			appDirs.getSiteConfigDir("myapp", "1.2.3", "harawata"));
-		assertEquals("/Library/Application Support/myapp/1.2.3",
-			appDirs.getSiteConfigDir("myapp", "1.2.3", "harawata", true));
-	}
+  @Test
+  public void testSiteConfigDir() {
+    assertEquals("/Library/Application Support",
+        appDirs.getSiteConfigDir(null, null, null));
+    assertEquals("/Library/Application Support",
+        appDirs.getSiteConfigDir(null, null, null, true));
+    assertEquals("/Library/Application Support/myapp",
+        appDirs.getSiteConfigDir("myapp", null, null));
+    assertEquals("/Library/Application Support/myapp",
+        appDirs.getSiteConfigDir("myapp", null, null, true));
+    assertEquals("/Library/Application Support/myapp/1.2.3",
+        appDirs.getSiteConfigDir("myapp", "1.2.3", null));
+    assertEquals("/Library/Application Support/myapp/1.2.3",
+        appDirs.getSiteConfigDir("myapp", "1.2.3", null, true));
+    assertEquals("/Library/Application Support/myapp/1.2.3",
+        appDirs.getSiteConfigDir("myapp", "1.2.3", "harawata"));
+    assertEquals("/Library/Application Support/myapp/1.2.3",
+        appDirs.getSiteConfigDir("myapp", "1.2.3", "harawata", true));
+  }
 
-	@AfterClass
-	public static void tearDown()
-	{
-		if (origOs == null)
-			System.clearProperty(AppDirs.OS_NAME);
-		else
-			System.setProperty(AppDirs.OS_NAME, origOs);
+  @AfterClass
+  public static void tearDown() {
+    if (origOs == null)
+      System.clearProperty(AppDirs.OS_NAME);
+    else
+      System.setProperty(AppDirs.OS_NAME, origOs);
 
-		if (origHome == null)
-			System.clearProperty(AppDirs.USER_HOME);
-		else
-			System.setProperty(AppDirs.USER_HOME, origHome);
+    if (origHome == null)
+      System.clearProperty(AppDirs.USER_HOME);
+    else
+      System.setProperty(AppDirs.USER_HOME, origHome);
 
-		if (origFileSeparator == null)
-			System.clearProperty(AppDirs.FILE_SEPARATOR);
-		else
-			System.setProperty(AppDirs.FILE_SEPARATOR, origFileSeparator);
-	}
+    if (origFileSeparator == null)
+      System.clearProperty(AppDirs.FILE_SEPARATOR);
+    else
+      System.setProperty(AppDirs.FILE_SEPARATOR, origFileSeparator);
+  }
 }

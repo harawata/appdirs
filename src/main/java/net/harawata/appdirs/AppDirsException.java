@@ -14,27 +14,22 @@
 
 package net.harawata.appdirs;
 
-public class AppDirsException extends RuntimeException
-{
-	private static final long serialVersionUID = -2414166199405082671L;
+public class AppDirsException extends RuntimeException {
+  private static final long serialVersionUID = -2414166199405082671L;
 
-	public AppDirsException()
-	{
-		super();
-	}
+  public AppDirsException() {
+    super();
+  }
 
-	public AppDirsException(String message, Throwable cause)
-	{
-		super(message, cause);
-	}
+  public AppDirsException(String message, Throwable cause) {
+    super(message, cause);
+  }
 
-	public AppDirsException(String message)
-	{
-		super(message);
-	}
+  public AppDirsException(String message) {
+    super(message);
+  }
 
-	public AppDirsException(Throwable cause)
-	{
-		super(cause);
-	}
+  public AppDirsException(Throwable cause) {
+    super(cause);
+  }
 }

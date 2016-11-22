@@ -16,73 +16,62 @@ package net.harawata.appdirs.impl;
 
 import net.harawata.appdirs.AppDirs;
 
-public class WindowsAppDirs extends AppDirs
-{
-	private WindowsFolderResolver folderResolver;
+public class WindowsAppDirs extends AppDirs {
+  private WindowsFolderResolver folderResolver;
 
-	public enum FolderId
-	{
-		APPDATA,
-		LOCAL_APPDATA,
-		COMMON_APPDATA;
-	}
+  public enum FolderId {
+    APPDATA, LOCAL_APPDATA, COMMON_APPDATA;
+  }
 
-	public WindowsAppDirs(WindowsFolderResolver folderResolver)
-	{
-		super();
-		this.folderResolver = folderResolver;
-	}
+  public WindowsAppDirs(WindowsFolderResolver folderResolver) {
+    super();
+    this.folderResolver = folderResolver;
+  }
 
-	public String getUserDataDir(String appName, String appVersion, String appAuthor,
-		boolean roaming)
-	{
-		String dir = roaming ? getAppData() : getLocalAppData();
-		return buildPath(dir, appAuthor == null ? appName : appAuthor, appName, appVersion);
-	}
+  public String getUserDataDir(String appName, String appVersion,
+      String appAuthor, boolean roaming) {
+    String dir = roaming ? getAppData() : getLocalAppData();
+    return buildPath(dir, appAuthor == null ? appName : appAuthor, appName,
+        appVersion);
+  }
 
-	public String getUserConfigDir(String appName, String appVersion, String appAuthor,
-		boolean roaming)
-	{
-		return getUserDataDir(appName, appVersion, appAuthor, roaming);
-	}
+  public String getUserConfigDir(String appName, String appVersion,
+      String appAuthor, boolean roaming) {
+    return getUserDataDir(appName, appVersion, appAuthor, roaming);
+  }
 
-	public String getUserCacheDir(String appName, String appVersion, String appAuthor)
-	{
-		return buildPath(getLocalAppData(), appAuthor == null ? appName : appAuthor, appName,
-			"\\Cache", appVersion);
-	}
+  public String getUserCacheDir(String appName, String appVersion,
+      String appAuthor) {
+    return buildPath(getLocalAppData(), appAuthor == null ? appName : appAuthor,
+        appName, "\\Cache", appVersion);
+  }
 
-	public String getSiteDataDir(String appName, String appVersion, String appAuthor,
-		boolean multiPath)
-	{
-		return buildPath(getCommonAppData(), appAuthor == null ? appName : appAuthor, appName,
-			appVersion);
-	}
+  public String getSiteDataDir(String appName, String appVersion,
+      String appAuthor, boolean multiPath) {
+    return buildPath(getCommonAppData(),
+        appAuthor == null ? appName : appAuthor, appName, appVersion);
+  }
 
-	public String getSiteConfigDir(String appName, String appVersion, String appAuthor,
-		boolean multiPath)
-	{
-		return getSiteDataDir(appName, appVersion, appAuthor, multiPath);
-	}
+  public String getSiteConfigDir(String appName, String appVersion,
+      String appAuthor, boolean multiPath) {
+    return getSiteDataDir(appName, appVersion, appAuthor, multiPath);
+  }
 
-	public String getUserLogDir(String appName, String appVersion, String appAuthor)
-	{
-		return buildPath(getLocalAppData(), appAuthor == null ? appName : appAuthor, appName,
-			"\\Logs", appVersion);
-	}
+  public String getUserLogDir(String appName, String appVersion,
+      String appAuthor) {
+    return buildPath(getLocalAppData(), appAuthor == null ? appName : appAuthor,
+        appName, "\\Logs", appVersion);
+  }
 
-	protected String getAppData()
-	{
-		return folderResolver.resolveFolder(FolderId.APPDATA);
-	}
+  protected String getAppData() {
+    return folderResolver.resolveFolder(FolderId.APPDATA);
+  }
 
-	protected String getLocalAppData()
-	{
-		return folderResolver.resolveFolder(FolderId.LOCAL_APPDATA);
-	}
+  protected String getLocalAppData() {
+    return folderResolver.resolveFolder(FolderId.LOCAL_APPDATA);
+  }
 
-	protected String getCommonAppData()
-	{
-		return folderResolver.resolveFolder(FolderId.COMMON_APPDATA);
-	}
+  protected String getCommonAppData() {
+    return folderResolver.resolveFolder(FolderId.COMMON_APPDATA);
+  }
 }

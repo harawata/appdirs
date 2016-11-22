@@ -16,7 +16,6 @@ package net.harawata.appdirs.impl;
 
 import net.harawata.appdirs.impl.WindowsAppDirs.FolderId;
 
-public interface WindowsFolderResolver
-{
-	String resolveFolder(FolderId folderId);
+public interface WindowsFolderResolver {
+  String resolveFolder(FolderId folderId);
 }

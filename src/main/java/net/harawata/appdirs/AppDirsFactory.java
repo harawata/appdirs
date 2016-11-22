@@ -23,34 +23,27 @@ import net.harawata.appdirs.impl.UnixAppDirs;
 import net.harawata.appdirs.impl.WindowsAppDirs;
 import net.harawata.appdirs.impl.WindowsFolderResolver;
 
-public class AppDirsFactory
-{
-	private static final Logger logger = LoggerFactory.getLogger(AppDirsFactory.class);
+public class AppDirsFactory {
+  private static final Logger logger = LoggerFactory
+      .getLogger(AppDirsFactory.class);
 
-	private AppDirsFactory()
-	{
-		super();
-	}
+  private AppDirsFactory() {
+    super();
+  }
 
-	public static AppDirs getInstance()
-	{
-		String os = System.getProperty("os.name").toLowerCase();
-		if (os.startsWith("mac os x"))
-		{
-			logger.debug("os.name {} is resolved to Mac OS X", os);
-			return new MacOSXAppDirs();
-		}
-		else if (os.startsWith("windows"))
-		{
-			logger.debug("os.name {} is resolved to Windows", os);
-			WindowsFolderResolver folderResolver = new ShellFolderResolver();
-			return new WindowsAppDirs(folderResolver);
-		}
-		else
-		{
-			// Assume other *nix.
-			logger.debug("os.name {} is resolved to *nix", os);
-			return new UnixAppDirs();
-		}
-	}
+  public static AppDirs getInstance() {
+    String os = System.getProperty("os.name").toLowerCase();
+    if (os.startsWith("mac os x")) {
+      logger.debug("os.name {} is resolved to Mac OS X", os);
+      return new MacOSXAppDirs();
+    } else if (os.startsWith("windows")) {
+      logger.debug("os.name {} is resolved to Windows", os);
+      WindowsFolderResolver folderResolver = new ShellFolderResolver();
+      return new WindowsAppDirs(folderResolver);
+    } else {
+      // Assume other *nix.
+      logger.debug("os.name {} is resolved to *nix", os);
+      return new UnixAppDirs();
+    }
+  }
 }
