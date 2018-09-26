@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>net.harawata</groupId>
   <artifactId>appdirs</artifactId>
-  <version>1.0.1</version>
+  <version>1.0.2-SNAPSHOT</version>
   <packaging>jar</packaging>
   <name>Java AppDirs</name>
   <description>Returns paths to platform dependent special directories.</description>
@@ -46,7 +46,7 @@
     <dependency>
       <groupId>net.java.dev.jna</groupId>
       <artifactId>jna-platform</artifactId>
-      <version>4.5.0</version>
+      <version>4.5.2</version>
     </dependency>
   </dependencies>
   <distributionManagement>
