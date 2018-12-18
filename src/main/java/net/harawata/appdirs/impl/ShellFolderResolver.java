@@ -14,39 +14,60 @@
 
 package net.harawata.appdirs.impl;
 
-import net.harawata.appdirs.AppDirsException;
-import net.harawata.appdirs.impl.WindowsAppDirs.FolderId;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.sun.jna.Native;
-import com.sun.jna.platform.win32.Shell32;
+import com.sun.jna.platform.win32.Guid.GUID;
+import com.sun.jna.platform.win32.KnownFolders;
+import com.sun.jna.platform.win32.Shell32Util;
 import com.sun.jna.platform.win32.ShlObj;
-import com.sun.jna.platform.win32.W32Errors;
-import com.sun.jna.platform.win32.WinDef;
-import com.sun.jna.platform.win32.WinNT.HRESULT;
+import com.sun.jna.platform.win32.Win32Exception;
+
+import net.harawata.appdirs.AppDirsException;
+import net.harawata.appdirs.impl.WindowsAppDirs.FolderId;
 
 public class ShellFolderResolver implements WindowsFolderResolver {
   private static final Logger logger = LoggerFactory
       .getLogger(ShellFolderResolver.class);
 
   public String resolveFolder(FolderId folderId) {
-    int folder = convertFolderId(folderId);
-
-    char[] pszPath = new char[WinDef.MAX_PATH];
-    HRESULT result = Shell32.INSTANCE.SHGetFolderPath(null, folder, null, null,
-        pszPath);
-    if (W32Errors.S_OK.equals(result)) {
-      return Native.toString(pszPath);
+    try {
+      logger.debug("Invoking SHGetKnownFolderPath");
+      return Shell32Util.getKnownFolderPath(convertFolderIdToGuid(folderId));
+    } catch (Win32Exception e) {
+      logger.error("SHGetKnownFolderPath returns an error: {}",
+          e.getErrorCode());
+      throw new AppDirsException(
+          "SHGetKnownFolderPath returns an error: " + e.getErrorCode());
+    } catch (UnsatisfiedLinkError e) {
+      // Fallback for pre-vista OSes. #5
+      try {
+        logger.debug("SHGetKnownFolderPath failed. Trying SHGetFolderPath.");
+        int folder = convertFolderIdToCsidl(folderId);
+        return Shell32Util.getFolderPath(folder);
+      } catch (Win32Exception e2) {
+        logger.error("SHGetFolderPath returns an error: {}", e2);
+        throw new AppDirsException(
+            "SHGetFolderPath returns an error: " + e2.getErrorCode());
+      }
     }
-
-    logger.error("SHGetFolderPath returns an error: {}", result.intValue());
-    throw new AppDirsException(
-        "SHGetFolderPath returns an error: " + result.intValue());
   }
 
-  protected int convertFolderId(FolderId folderId) {
+  private GUID convertFolderIdToGuid(FolderId folderId) {
+    switch (folderId) {
+    case APPDATA:
+      return KnownFolders.FOLDERID_RoamingAppData;
+    case LOCAL_APPDATA:
+      return KnownFolders.FOLDERID_LocalAppData;
+    case COMMON_APPDATA:
+      return KnownFolders.FOLDERID_ProgramData;
+    default:
+      throw new AppDirsException(
+          "Unknown folder ID " + folderId + " was specified.");
+    }
+  }
+
+  protected int convertFolderIdToCsidl(FolderId folderId) {
     switch (folderId) {
     case APPDATA:
       return ShlObj.CSIDL_APPDATA;
