@@ -16,7 +16,6 @@ package net.harawata.appdirs.impl;
 
 import static org.junit.Assert.*;
 import net.harawata.appdirs.AppDirs;
-import net.harawata.appdirs.AppDirsFactory;
 
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -24,8 +23,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class MacOSXAppDirTest {
-  private static String origOs;
-
   private static String origHome;
 
   private static String origFileSeparator;
@@ -34,14 +31,13 @@ public class MacOSXAppDirTest {
 
   @BeforeClass
   public static void setUp() {
-    origOs = System.setProperty(AppDirs.OS_NAME, "Mac OS X");
-    origHome = System.setProperty(AppDirs.USER_HOME, "/Users/somebody");
-    origFileSeparator = System.setProperty(AppDirs.FILE_SEPARATOR, "/");
+    origHome = System.setProperty("user.home", "/Users/somebody");
+    origFileSeparator = System.setProperty("file.separator", "/");
   }
 
   @Before
   public void pre() {
-    appDirs = AppDirsFactory.getInstance();
+    appDirs = new MacOSXAppDirs();
   }
 
   @Test
@@ -150,19 +146,14 @@ public class MacOSXAppDirTest {
 
   @AfterClass
   public static void tearDown() {
-    if (origOs == null)
-      System.clearProperty(AppDirs.OS_NAME);
-    else
-      System.setProperty(AppDirs.OS_NAME, origOs);
-
     if (origHome == null)
-      System.clearProperty(AppDirs.USER_HOME);
+      System.clearProperty("user.home");
     else
-      System.setProperty(AppDirs.USER_HOME, origHome);
+      System.setProperty("user.home", origHome);
 
     if (origFileSeparator == null)
-      System.clearProperty(AppDirs.FILE_SEPARATOR);
+      System.clearProperty("file.separator");
     else
-      System.setProperty(AppDirs.FILE_SEPARATOR, origFileSeparator);
+      System.setProperty("file.separator", origFileSeparator);
   }
 }

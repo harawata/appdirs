@@ -15,7 +15,6 @@
 package net.harawata.appdirs.impl;
 
 import static org.junit.Assert.*;
-import net.harawata.appdirs.AppDirs;
 
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -29,7 +28,7 @@ public class WindowsAppDirTest {
 
   @BeforeClass
   public static void setUp() {
-    origFileSeparator = System.setProperty(AppDirs.FILE_SEPARATOR, "\\");
+    origFileSeparator = System.setProperty("file.separator", "\\");
   }
 
   @Before
@@ -178,8 +177,8 @@ public class WindowsAppDirTest {
   @AfterClass
   public static void tearDown() {
     if (origFileSeparator == null)
-      System.clearProperty(AppDirs.FILE_SEPARATOR);
+      System.clearProperty("file.separator");
     else
-      System.setProperty(AppDirs.FILE_SEPARATOR, origFileSeparator);
+      System.setProperty("file.separator", origFileSeparator);
   }
 }

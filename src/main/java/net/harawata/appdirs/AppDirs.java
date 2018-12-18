@@ -15,14 +15,6 @@
 package net.harawata.appdirs;
 
 public abstract class AppDirs {
-  public static final String OS_NAME = "os.name";
-
-  public static final String USER_HOME = "user.home";
-
-  public static final String FILE_SEPARATOR = "file.separator";
-
-  public static final String PATH_SEPARATOR = "path.separator";
-
   public String getUserDataDir(String appName, String appVersion,
       String appAuthor) {
     return getUserDataDir(appName, appVersion, appAuthor, false);
