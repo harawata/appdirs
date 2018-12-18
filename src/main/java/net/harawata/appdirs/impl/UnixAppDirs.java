@@ -14,6 +14,8 @@
 
 package net.harawata.appdirs.impl;
 
+import java.util.Map;
+
 import net.harawata.appdirs.AppDirs;
 
 public class UnixAppDirs extends AppDirs {
@@ -27,30 +29,30 @@ public class UnixAppDirs extends AppDirs {
 
   public static final String XDG_DATA_HOME = "XDG_DATA_HOME";
 
+  protected final Map<String, String> sysEnv;
+
   public String getUserDataDir(String appName, String appVersion,
       String appAuthor, boolean roaming) {
-    String dir = System.getProperty(XDG_DATA_HOME,
+    String dir = getOrDefault(XDG_DATA_HOME,
         buildPath(home(), "/.local/share"));
     return buildPath(dir, appName, appVersion);
   }
 
   public String getUserConfigDir(String appName, String appVersion,
       String appAuthor, boolean roaming) {
-    String dir = System.getProperty(XDG_CONFIG_HOME,
-        buildPath(home(), "/.config"));
+    String dir = getOrDefault(XDG_CONFIG_HOME, buildPath(home(), "/.config"));
     return buildPath(dir, appName, appVersion);
   }
 
   public String getUserCacheDir(String appName, String appVersion,
       String appAuthor) {
-    String dir = System.getProperty(XDG_CACHE_HOME,
-        buildPath(home(), "/.cache"));
+    String dir = getOrDefault(XDG_CACHE_HOME, buildPath(home(), "/.cache"));
     return buildPath(dir, appName, appVersion);
   }
 
   public String getSiteDataDir(String appName, String appVersion,
       String appAuthor, boolean multiPath) {
-    String xdgDirs = System.getProperty(XDG_DATA_DIRS);
+    String xdgDirs = sysEnv.get(XDG_DATA_DIRS);
     if (xdgDirs == null) {
       String primary = buildPath("/usr/local/share", appName, appVersion);
       String secondary = buildPath("/usr/share", appName, appVersion);
@@ -67,7 +69,7 @@ public class UnixAppDirs extends AppDirs {
 
   public String getSiteConfigDir(String appName, String appVersion,
       String appAuthor, boolean multiPath) {
-    String xdgDirs = System.getProperty(XDG_CONFIG_DIRS);
+    String xdgDirs = sysEnv.get(XDG_CONFIG_DIRS);
     if (xdgDirs == null) {
       return buildPath("/etc/xdg", appName, appVersion);
     }
@@ -92,8 +94,22 @@ public class UnixAppDirs extends AppDirs {
 
   public String getUserLogDir(String appName, String appVersion,
       String appAuthor) {
-    String dir = System.getProperty(XDG_CACHE_HOME,
-        buildPath(home(), "/.cache"));
+    String dir = getOrDefault(XDG_CACHE_HOME, buildPath(home(), "/.cache"));
     return buildPath(dir, appName, "/logs", appVersion);
+  }
+
+  public String getOrDefault(String key, String def) {
+    String val = sysEnv.get(key);
+    return val == null ? def : val;
+  }
+
+  public UnixAppDirs(Map<String, String> sysEnv) {
+    super();
+    this.sysEnv = sysEnv;
+  }
+
+  public UnixAppDirs() {
+    super();
+    this.sysEnv = System.getenv();
   }
 }
