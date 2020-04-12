@@ -98,6 +98,12 @@ public class UnixAppDirs extends AppDirs {
     return buildPath(dir, appName, "/logs", appVersion);
   }
 
+  @Override
+  public String getSharedDir(String appName, String appVersion,
+      String appAuthor) {
+    return buildPath("/srv", appName, appVersion);
+  }
+
   public String getOrDefault(String key, String def) {
     String val = sysEnv.get(key);
     return val == null ? def : val;

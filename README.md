@@ -31,6 +31,7 @@ Currently, __AppDirs__ has the following methods.
 - getUserLogDir
 - getSiteDataDir
 - getSiteConfigDir
+- getSharedDir
 
 Here is a test program and the output on some platforms.
 
@@ -60,6 +61,8 @@ public class AppDirTest {
       + appDirs.getSiteConfigDir("myapp", "1.2.3", "harawata"));
     System.out.println("Site config dir (multi path): "
       + appDirs.getSiteConfigDir("myapp", "1.2.3", "harawata", true));
+    System.out.println("Shared dir: "
+      + appDirs.getSharedDir("myapp", "1.2.3", "harawata"));
   }
 }
 ```
@@ -77,6 +80,7 @@ Site data dir: /Library/Application Support/myapp/1.2.3
 Site data dir (multi path): /Library/Application Support/myapp/1.2.3
 Site config dir: /Library/Application Support/myapp/1.2.3
 Site config dir (multi path): /Library/Application Support/myapp/1.2.3
+Shared dir: /Users/Shared/Library/Application Support/myapp/1.2.3
 ```
 - _appAuthor_ parameter is not used on Mac OS X.
 - _roaming_ and _multiPath_ parameters have no effect on Mac OS X.
@@ -93,6 +97,7 @@ Site data dir: C:\ProgramData\harawata\myapp\1.2.3
 Site data dir (multi path): C:\ProgramData\harawata\myapp\1.2.3
 Site config dir: C:\ProgramData\harawata\myapp\1.2.3
 Site config dir (multi path): C:\ProgramData\harawata\myapp\1.2.3
+Shared dir: C:\ProgramData\harawata\myapp\1.2.3
 ```
 - Internally calls [SHGetFolderPath](http://msdn.microsoft.com/en-us/library/bb762181%28VS.85%29.aspx) via [Java Native Access (JNA)](https://github.com/twall/jna).
  - Returns CSIDL_LOCAL_APPDATA or CSIDL_APPDATA for user directories.
@@ -111,7 +116,9 @@ Site data dir: /usr/local/share/myapp/1.2.3
 Site data dir (multi path): /usr/local/share/myapp/1.2.3:/usr/share/myapp/1.2.3
 Site config dir: /etc/xdg/myapp/1.2.3
 Site config dir (multi path): /etc/xdg/myapp/1.2.3
+Shared dir: /srv/myapp/1.2.3
 ```
+
 - __AppDirs__ respects [XDG Base Directory Specification](http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html) if variables are defined.
  - Returns XDG_DATA_HOME for user data directory.
  - Returns XDG_CONFIG_HOME for user config directory.

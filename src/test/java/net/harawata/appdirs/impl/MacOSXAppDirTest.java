@@ -144,6 +144,18 @@ public class MacOSXAppDirTest {
         appDirs.getSiteConfigDir("myapp", "1.2.3", "harawata", true));
   }
 
+  @Test
+  public void testgetSharedDir() {
+    assertEquals("/Users/Shared/Library/Application Support",
+        appDirs.getSharedDir(null, null, null));
+    assertEquals("/Users/Shared/Library/Application Support/myapp",
+        appDirs.getSharedDir("myapp", null, null));
+    assertEquals("/Users/Shared/Library/Application Support/myapp/1.2.3",
+        appDirs.getSharedDir("myapp", "1.2.3", null));
+    assertEquals("/Users/Shared/Library/Application Support/myapp/1.2.3",
+        appDirs.getSharedDir("myapp", "1.2.3", "harawata"));
+  }
+
   @AfterClass
   public static void tearDown() {
     if (origHome == null)

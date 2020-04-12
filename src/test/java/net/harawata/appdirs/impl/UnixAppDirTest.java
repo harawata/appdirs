@@ -174,6 +174,17 @@ public class UnixAppDirTest {
         appDirs.getSiteConfigDir("myapp", "1.2.3", "harawata", true));
   }
 
+  @Test
+  public void testgetSharedDir() {
+    AppDirs appDirs = getAppDirs();
+    assertEquals("/srv", appDirs.getSharedDir(null, null, null));
+    assertEquals("/srv/myapp", appDirs.getSharedDir("myapp", null, null));
+    assertEquals("/srv/myapp/1.2.3",
+        appDirs.getSharedDir("myapp", "1.2.3", null));
+    assertEquals("/srv/myapp/1.2.3",
+        appDirs.getSharedDir("myapp", "1.2.3", "harawata"));
+  }
+
   private AppDirs getAppDirs() {
     return getAppDirs(new HashMap<String, String>());
   }
