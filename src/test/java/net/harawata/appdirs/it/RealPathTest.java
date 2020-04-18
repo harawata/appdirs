@@ -18,24 +18,25 @@ import static org.junit.Assert.*;
 import static org.junit.Assume.*;
 
 import org.apache.commons.lang3.SystemUtils;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import net.harawata.appdirs.AppDirs;
 import net.harawata.appdirs.AppDirsFactory;
 
 public class RealPathTest {
-  private AppDirs appDirs;
+  private static AppDirs appDirs;
+  private static String home;
 
-  @Before
-  public void init() {
+  @BeforeClass
+  public static void init() {
     appDirs = AppDirsFactory.getInstance();
+    home = System.getProperty("user.home");
   }
 
   @Test
   public void testRealPathMacUserDataDir() {
     assumeTrue(SystemUtils.IS_OS_MAC_OSX);
-    final String home = System.getProperty("user.home");
     assertEquals(home + "/Library/Application Support",
         appDirs.getUserDataDir(null, null, null));
   }
@@ -43,7 +44,6 @@ public class RealPathTest {
   @Test
   public void testRealPathMacUserConfigDir() {
     assumeTrue(SystemUtils.IS_OS_MAC_OSX);
-    final String home = System.getProperty("user.home");
     assertEquals(home + "/Library/Application Support",
         appDirs.getUserConfigDir(null, null, null));
   }
@@ -51,7 +51,6 @@ public class RealPathTest {
   @Test
   public void testRealPathMacUserCacheDir() {
     assumeTrue(SystemUtils.IS_OS_MAC_OSX);
-    final String home = System.getProperty("user.home");
     assertEquals(home + "/Library/Caches",
         appDirs.getUserCacheDir(null, null, null));
   }
@@ -59,7 +58,6 @@ public class RealPathTest {
   @Test
   public void testRealPathMacUserLogDir() {
     assumeTrue(SystemUtils.IS_OS_MAC_OSX);
-    final String home = System.getProperty("user.home");
     assertEquals(home + "/Library/Logs",
         appDirs.getUserLogDir(null, null, null));
   }
@@ -81,7 +79,6 @@ public class RealPathTest {
   @Test
   public void testRealPathLinuxUserDataDir() {
     assumeTrue(SystemUtils.IS_OS_LINUX);
-    final String home = System.getProperty("user.home");
     assertEquals(home + "/.local/share",
         appDirs.getUserDataDir(null, null, null));
   }
@@ -89,21 +86,18 @@ public class RealPathTest {
   @Test
   public void testRealPathLinuxUserConfigDir() {
     assumeTrue(SystemUtils.IS_OS_LINUX);
-    final String home = System.getProperty("user.home");
     assertEquals(home + "/.config", appDirs.getUserConfigDir(null, null, null));
   }
 
   @Test
   public void testRealPathLinuxUserCacheDir() {
     assumeTrue(SystemUtils.IS_OS_LINUX);
-    final String home = System.getProperty("user.home");
     assertEquals(home + "/.cache", appDirs.getUserCacheDir(null, null, null));
   }
 
   @Test
   public void testRealPathLinuxUserLogDir() {
     assumeTrue(SystemUtils.IS_OS_LINUX);
-    final String home = System.getProperty("user.home");
     assertEquals(home + "/.cache/logs",
         appDirs.getUserLogDir(null, null, null));
   }
@@ -123,46 +117,40 @@ public class RealPathTest {
   @Test
   public void testRealPathWinUserDataDir() {
     assumeTrue(SystemUtils.IS_OS_WINDOWS);
-    assertEquals(
-        "C:\\Documents and Settings\\harawata\\Local Settings\\Application Data",
+    assertEquals(home + "\\AppData\\Local",
         appDirs.getUserDataDir(null, null, null));
   }
 
   @Test
   public void testRealPathWinUserConfigDir() {
     assumeTrue(SystemUtils.IS_OS_WINDOWS);
-    assertEquals(
-        "C:\\Documents and Settings\\harawata\\Local Settings\\Application Data",
+    assertEquals(home + "\\AppData\\Local",
         appDirs.getUserConfigDir(null, null, null));
   }
 
   @Test
   public void testRealPathWinUserCacheDir() {
     assumeTrue(SystemUtils.IS_OS_WINDOWS);
-    assertEquals(
-        "C:\\Documents and Settings\\harawata\\Local Settings\\Application Data\\Cache",
+    assertEquals(home + "\\AppData\\Local\\Cache",
         appDirs.getUserCacheDir(null, null, null));
   }
 
   @Test
   public void testRealPathWinUserLogDir() {
     assumeTrue(SystemUtils.IS_OS_WINDOWS);
-    assertEquals(
-        "C:\\Documents and Settings\\harawata\\Local Settings\\Application Data\\Logs",
+    assertEquals(home + "\\AppData\\Local\\Logs",
         appDirs.getUserLogDir(null, null, null));
   }
 
   @Test
   public void testRealPathWinSiteDataDir() {
     assumeTrue(SystemUtils.IS_OS_WINDOWS);
-    assertEquals("C:\\Documents and Settings\\All Users\\Application Data",
-        appDirs.getSiteDataDir(null, null, null));
+    assertEquals("C:\\ProgramData", appDirs.getSiteDataDir(null, null, null));
   }
 
   @Test
   public void testRealPathWinSiteConfigDir() {
     assumeTrue(SystemUtils.IS_OS_WINDOWS);
-    assertEquals("C:\\Documents and Settings\\All Users\\Application Data",
-        appDirs.getSiteConfigDir(null, null, null));
+    assertEquals("C:\\ProgramData", appDirs.getSiteConfigDir(null, null, null));
   }
 }
