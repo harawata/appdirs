@@ -54,6 +54,12 @@
       <artifactId>jna-platform</artifactId>
       <version>5.5.0</version>
     </dependency>
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+      <version>3.10</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
   <distributionManagement>
     <snapshotRepository>
