@@ -61,6 +61,12 @@ public class WindowsAppDirs extends AppDirs {
         appVersion);
   }
 
+  @Override
+  public String getSharedDir(String appName, String appVersion,
+      String appAuthor) {
+    return buildPath(getCommonAppData(), appAuthor, appName, appVersion);
+  }
+
   protected String getAppData() {
     return folderResolver.resolveFolder(FolderId.APPDATA);
   }

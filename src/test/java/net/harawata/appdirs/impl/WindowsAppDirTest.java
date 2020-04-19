@@ -174,6 +174,21 @@ public class WindowsAppDirTest {
         appDirs.getSiteConfigDir("myapp", "1.2.3", "harawata", true));
   }
 
+  @Test
+  public void testgetSharedDir() {
+    assertEquals("C:\\Documents and Settings\\All Users\\Application Data",
+        appDirs.getSharedDir(null, null, null));
+    assertEquals(
+        "C:\\Documents and Settings\\All Users\\Application Data\\myapp",
+        appDirs.getSharedDir("myapp", null, null));
+    assertEquals(
+        "C:\\Documents and Settings\\All Users\\Application Data\\myapp\\1.2.3",
+        appDirs.getSharedDir("myapp", "1.2.3", null));
+    assertEquals(
+        "C:\\Documents and Settings\\All Users\\Application Data\\harawata\\myapp\\1.2.3",
+        appDirs.getSharedDir("myapp", "1.2.3", "harawata"));
+  }
+
   @AfterClass
   public static void tearDown() {
     if (origFileSeparator == null)

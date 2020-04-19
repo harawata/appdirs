@@ -53,6 +53,9 @@ public abstract class AppDirs {
   public abstract String getUserLogDir(String appName, String appVersion,
       String appAuthor);
 
+  public abstract String getSharedDir(String appName, String appVersion,
+      String appAuthor);
+
   protected String home() {
     return System.getProperty("user.home");
   }

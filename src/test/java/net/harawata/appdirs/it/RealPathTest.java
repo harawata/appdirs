@@ -77,6 +77,13 @@ public class RealPathTest {
   }
 
   @Test
+  public void testRealPathMacSharedDir() {
+    assumeTrue(SystemUtils.IS_OS_MAC_OSX);
+    assertEquals("/Users/Shared/Library/Application Support",
+        appDirs.getSharedDir(null, null, null));
+  }
+
+  @Test
   public void testRealPathLinuxUserDataDir() {
     assumeTrue(SystemUtils.IS_OS_LINUX);
     assertEquals(home + "/.local/share",
@@ -112,6 +119,12 @@ public class RealPathTest {
   public void testRealPathLinuxSiteConfigDir() {
     assumeTrue(SystemUtils.IS_OS_LINUX);
     assertEquals("/etc/xdg", appDirs.getSiteConfigDir(null, null, null));
+  }
+
+  @Test
+  public void testRealPathLinuxSharedDir() {
+    assumeTrue(SystemUtils.IS_OS_LINUX);
+    assertEquals("/srv", appDirs.getSharedDir(null, null, null));
   }
 
   @Test
@@ -152,5 +165,11 @@ public class RealPathTest {
   public void testRealPathWinSiteConfigDir() {
     assumeTrue(SystemUtils.IS_OS_WINDOWS);
     assertEquals("C:\\ProgramData", appDirs.getSiteConfigDir(null, null, null));
+  }
+
+  @Test
+  public void testRealPathWinSharedDir() {
+    assumeTrue(SystemUtils.IS_OS_WINDOWS);
+    assertEquals("C:\\ProgramData", appDirs.getSharedDir(null, null, null));
   }
 }
