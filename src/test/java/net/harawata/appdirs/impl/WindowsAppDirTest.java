@@ -44,16 +44,16 @@ public class WindowsAppDirTest {
     assertEquals("C:\\Documents and Settings\\harawata\\Application Data",
         appDirs.getUserDataDir(null, null, null, true));
     assertEquals(
-        "C:\\Documents and Settings\\harawata\\Local Settings\\Application Data\\myapp\\myapp",
+        "C:\\Documents and Settings\\harawata\\Local Settings\\Application Data\\myapp",
         appDirs.getUserDataDir("myapp", null, null));
     assertEquals(
-        "C:\\Documents and Settings\\harawata\\Application Data\\myapp\\myapp",
+        "C:\\Documents and Settings\\harawata\\Application Data\\myapp",
         appDirs.getUserDataDir("myapp", null, null, true));
     assertEquals(
-        "C:\\Documents and Settings\\harawata\\Local Settings\\Application Data\\myapp\\myapp\\1.2.3",
+        "C:\\Documents and Settings\\harawata\\Local Settings\\Application Data\\myapp\\1.2.3",
         appDirs.getUserDataDir("myapp", "1.2.3", null));
     assertEquals(
-        "C:\\Documents and Settings\\harawata\\Application Data\\myapp\\myapp\\1.2.3",
+        "C:\\Documents and Settings\\harawata\\Application Data\\myapp\\1.2.3",
         appDirs.getUserDataDir("myapp", "1.2.3", null, true));
     assertEquals(
         "C:\\Documents and Settings\\harawata\\Local Settings\\Application Data\\harawata\\myapp\\1.2.3",
@@ -71,16 +71,16 @@ public class WindowsAppDirTest {
     assertEquals("C:\\Documents and Settings\\harawata\\Application Data",
         appDirs.getUserConfigDir(null, null, null, true));
     assertEquals(
-        "C:\\Documents and Settings\\harawata\\Local Settings\\Application Data\\myapp\\myapp",
+        "C:\\Documents and Settings\\harawata\\Local Settings\\Application Data\\myapp",
         appDirs.getUserConfigDir("myapp", null, null));
     assertEquals(
-        "C:\\Documents and Settings\\harawata\\Application Data\\myapp\\myapp",
+        "C:\\Documents and Settings\\harawata\\Application Data\\myapp",
         appDirs.getUserConfigDir("myapp", null, null, true));
     assertEquals(
-        "C:\\Documents and Settings\\harawata\\Local Settings\\Application Data\\myapp\\myapp\\1.2.3",
+        "C:\\Documents and Settings\\harawata\\Local Settings\\Application Data\\myapp\\1.2.3",
         appDirs.getUserConfigDir("myapp", "1.2.3", null));
     assertEquals(
-        "C:\\Documents and Settings\\harawata\\Application Data\\myapp\\myapp\\1.2.3",
+        "C:\\Documents and Settings\\harawata\\Application Data\\myapp\\1.2.3",
         appDirs.getUserConfigDir("myapp", "1.2.3", null, true));
     assertEquals(
         "C:\\Documents and Settings\\harawata\\Local Settings\\Application Data\\harawata\\myapp\\1.2.3",
@@ -96,10 +96,10 @@ public class WindowsAppDirTest {
         "C:\\Documents and Settings\\harawata\\Local Settings\\Application Data\\Cache",
         appDirs.getUserCacheDir(null, null, null));
     assertEquals(
-        "C:\\Documents and Settings\\harawata\\Local Settings\\Application Data\\myapp\\myapp\\Cache",
+        "C:\\Documents and Settings\\harawata\\Local Settings\\Application Data\\myapp\\Cache",
         appDirs.getUserCacheDir("myapp", null, null));
     assertEquals(
-        "C:\\Documents and Settings\\harawata\\Local Settings\\Application Data\\myapp\\myapp\\Cache\\1.2.3",
+        "C:\\Documents and Settings\\harawata\\Local Settings\\Application Data\\myapp\\Cache\\1.2.3",
         appDirs.getUserCacheDir("myapp", "1.2.3", null));
     assertEquals(
         "C:\\Documents and Settings\\harawata\\Local Settings\\Application Data\\harawata\\myapp\\Cache\\1.2.3",
@@ -112,10 +112,10 @@ public class WindowsAppDirTest {
         "C:\\Documents and Settings\\harawata\\Local Settings\\Application Data\\Logs",
         appDirs.getUserLogDir(null, null, null));
     assertEquals(
-        "C:\\Documents and Settings\\harawata\\Local Settings\\Application Data\\myapp\\myapp\\Logs",
+        "C:\\Documents and Settings\\harawata\\Local Settings\\Application Data\\myapp\\Logs",
         appDirs.getUserLogDir("myapp", null, null));
     assertEquals(
-        "C:\\Documents and Settings\\harawata\\Local Settings\\Application Data\\myapp\\myapp\\Logs\\1.2.3",
+        "C:\\Documents and Settings\\harawata\\Local Settings\\Application Data\\myapp\\Logs\\1.2.3",
         appDirs.getUserLogDir("myapp", "1.2.3", null));
     assertEquals(
         "C:\\Documents and Settings\\harawata\\Local Settings\\Application Data\\harawata\\myapp\\Logs\\1.2.3",
@@ -129,16 +129,16 @@ public class WindowsAppDirTest {
     assertEquals("C:\\Documents and Settings\\All Users\\Application Data",
         appDirs.getSiteDataDir(null, null, null, true));
     assertEquals(
-        "C:\\Documents and Settings\\All Users\\Application Data\\myapp\\myapp",
+        "C:\\Documents and Settings\\All Users\\Application Data\\myapp",
         appDirs.getSiteDataDir("myapp", null, null));
     assertEquals(
-        "C:\\Documents and Settings\\All Users\\Application Data\\myapp\\myapp",
+        "C:\\Documents and Settings\\All Users\\Application Data\\myapp",
         appDirs.getSiteDataDir("myapp", null, null, true));
     assertEquals(
-        "C:\\Documents and Settings\\All Users\\Application Data\\myapp\\myapp\\1.2.3",
+        "C:\\Documents and Settings\\All Users\\Application Data\\myapp\\1.2.3",
         appDirs.getSiteDataDir("myapp", "1.2.3", null));
     assertEquals(
-        "C:\\Documents and Settings\\All Users\\Application Data\\myapp\\myapp\\1.2.3",
+        "C:\\Documents and Settings\\All Users\\Application Data\\myapp\\1.2.3",
         appDirs.getSiteDataDir("myapp", "1.2.3", null, true));
     assertEquals(
         "C:\\Documents and Settings\\All Users\\Application Data\\harawata\\myapp\\1.2.3",
@@ -155,16 +155,16 @@ public class WindowsAppDirTest {
     assertEquals("C:\\Documents and Settings\\All Users\\Application Data",
         appDirs.getSiteConfigDir(null, null, null, true));
     assertEquals(
-        "C:\\Documents and Settings\\All Users\\Application Data\\myapp\\myapp",
+        "C:\\Documents and Settings\\All Users\\Application Data\\myapp",
         appDirs.getSiteConfigDir("myapp", null, null));
     assertEquals(
-        "C:\\Documents and Settings\\All Users\\Application Data\\myapp\\myapp",
+        "C:\\Documents and Settings\\All Users\\Application Data\\myapp",
         appDirs.getSiteConfigDir("myapp", null, null, true));
     assertEquals(
-        "C:\\Documents and Settings\\All Users\\Application Data\\myapp\\myapp\\1.2.3",
+        "C:\\Documents and Settings\\All Users\\Application Data\\myapp\\1.2.3",
         appDirs.getSiteConfigDir("myapp", "1.2.3", null));
     assertEquals(
-        "C:\\Documents and Settings\\All Users\\Application Data\\myapp\\myapp\\1.2.3",
+        "C:\\Documents and Settings\\All Users\\Application Data\\myapp\\1.2.3",
         appDirs.getSiteConfigDir("myapp", "1.2.3", null, true));
     assertEquals(
         "C:\\Documents and Settings\\All Users\\Application Data\\harawata\\myapp\\1.2.3",

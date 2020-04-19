@@ -31,8 +31,7 @@ public class WindowsAppDirs extends AppDirs {
   public String getUserDataDir(String appName, String appVersion,
       String appAuthor, boolean roaming) {
     String dir = roaming ? getAppData() : getLocalAppData();
-    return buildPath(dir, appAuthor == null ? appName : appAuthor, appName,
-        appVersion);
+    return buildPath(dir, appAuthor, appName, appVersion);
   }
 
   public String getUserConfigDir(String appName, String appVersion,
@@ -42,14 +41,13 @@ public class WindowsAppDirs extends AppDirs {
 
   public String getUserCacheDir(String appName, String appVersion,
       String appAuthor) {
-    return buildPath(getLocalAppData(), appAuthor == null ? appName : appAuthor,
-        appName, "\\Cache", appVersion);
+    return buildPath(getLocalAppData(), appAuthor, appName, "\\Cache",
+        appVersion);
   }
 
   public String getSiteDataDir(String appName, String appVersion,
       String appAuthor, boolean multiPath) {
-    return buildPath(getCommonAppData(),
-        appAuthor == null ? appName : appAuthor, appName, appVersion);
+    return buildPath(getCommonAppData(), appAuthor, appName, appVersion);
   }
 
   public String getSiteConfigDir(String appName, String appVersion,
@@ -59,8 +57,8 @@ public class WindowsAppDirs extends AppDirs {
 
   public String getUserLogDir(String appName, String appVersion,
       String appAuthor) {
-    return buildPath(getLocalAppData(), appAuthor == null ? appName : appAuthor,
-        appName, "\\Logs", appVersion);
+    return buildPath(getLocalAppData(), appAuthor, appName, "\\Logs",
+        appVersion);
   }
 
   @Override
