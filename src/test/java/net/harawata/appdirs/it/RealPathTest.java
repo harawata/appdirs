@@ -44,7 +44,7 @@ public class RealPathTest {
   @Test
   public void testRealPathMacUserConfigDir() {
     assumeTrue(SystemUtils.IS_OS_MAC_OSX);
-    assertEquals(home + "/Library/Application Support",
+    assertEquals(home + "/Library/Preferences",
         appDirs.getUserConfigDir(null, null, null));
   }
 
@@ -72,7 +72,7 @@ public class RealPathTest {
   @Test
   public void testRealPathMacSiteConfigDir() {
     assumeTrue(SystemUtils.IS_OS_MAC_OSX);
-    assertEquals("/Library/Application Support",
+    assertEquals("/Library/Preferences",
         appDirs.getSiteConfigDir(null, null, null));
   }
 

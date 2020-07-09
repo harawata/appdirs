@@ -62,21 +62,21 @@ public class MacOSXAppDirTest {
 
   @Test
   public void testGetUserConfigDir() {
-    assertEquals("/Users/somebody/Library/Application Support",
+    assertEquals("/Users/somebody/Library/Preferences",
         appDirs.getUserConfigDir(null, null, null));
-    assertEquals("/Users/somebody/Library/Application Support",
+    assertEquals("/Users/somebody/Library/Preferences",
         appDirs.getUserConfigDir(null, null, null, true));
-    assertEquals("/Users/somebody/Library/Application Support/myapp",
+    assertEquals("/Users/somebody/Library/Preferences/myapp",
         appDirs.getUserConfigDir("myapp", null, null));
-    assertEquals("/Users/somebody/Library/Application Support/myapp",
+    assertEquals("/Users/somebody/Library/Preferences/myapp",
         appDirs.getUserConfigDir("myapp", null, null, true));
-    assertEquals("/Users/somebody/Library/Application Support/myapp/1.2.3",
+    assertEquals("/Users/somebody/Library/Preferences/myapp/1.2.3",
         appDirs.getUserConfigDir("myapp", "1.2.3", null));
-    assertEquals("/Users/somebody/Library/Application Support/myapp/1.2.3",
+    assertEquals("/Users/somebody/Library/Preferences/myapp/1.2.3",
         appDirs.getUserConfigDir("myapp", "1.2.3", null, true));
-    assertEquals("/Users/somebody/Library/Application Support/myapp/1.2.3",
+    assertEquals("/Users/somebody/Library/Preferences/myapp/1.2.3",
         appDirs.getUserConfigDir("myapp", "1.2.3", "harawata"));
-    assertEquals("/Users/somebody/Library/Application Support/myapp/1.2.3",
+    assertEquals("/Users/somebody/Library/Preferences/myapp/1.2.3",
         appDirs.getUserConfigDir("myapp", "1.2.3", "harawata", true));
   }
 
@@ -126,21 +126,21 @@ public class MacOSXAppDirTest {
 
   @Test
   public void testSiteConfigDir() {
-    assertEquals("/Library/Application Support",
+    assertEquals("/Library/Preferences",
         appDirs.getSiteConfigDir(null, null, null));
-    assertEquals("/Library/Application Support",
+    assertEquals("/Library/Preferences",
         appDirs.getSiteConfigDir(null, null, null, true));
-    assertEquals("/Library/Application Support/myapp",
+    assertEquals("/Library/Preferences/myapp",
         appDirs.getSiteConfigDir("myapp", null, null));
-    assertEquals("/Library/Application Support/myapp",
+    assertEquals("/Library/Preferences/myapp",
         appDirs.getSiteConfigDir("myapp", null, null, true));
-    assertEquals("/Library/Application Support/myapp/1.2.3",
+    assertEquals("/Library/Preferences/myapp/1.2.3",
         appDirs.getSiteConfigDir("myapp", "1.2.3", null));
-    assertEquals("/Library/Application Support/myapp/1.2.3",
+    assertEquals("/Library/Preferences/myapp/1.2.3",
         appDirs.getSiteConfigDir("myapp", "1.2.3", null, true));
-    assertEquals("/Library/Application Support/myapp/1.2.3",
+    assertEquals("/Library/Preferences/myapp/1.2.3",
         appDirs.getSiteConfigDir("myapp", "1.2.3", "harawata"));
-    assertEquals("/Library/Application Support/myapp/1.2.3",
+    assertEquals("/Library/Preferences/myapp/1.2.3",
         appDirs.getSiteConfigDir("myapp", "1.2.3", "harawata", true));
   }
 
