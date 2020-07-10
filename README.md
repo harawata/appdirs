@@ -72,14 +72,14 @@ public class AppDirTest {
 ```
 User data dir: /Users/ave/Library/Application Support/myapp/1.2.3
 User data dir (roaming): /Users/ave/Library/Application Support/myapp/1.2.3
-User config dir: /Users/ave/Library/Application Support/myapp/1.2.3
-User config dir (roaming): /Users/ave/Library/Application Support/myapp/1.2.3
+User config dir: /Users/ave/Library/Preferences/myapp/1.2.3
+User config dir (roaming): /Users/ave/Library/Preferences/myapp/1.2.3
 User cache dir: /Users/ave/Library/Caches/myapp/1.2.3
 User log dir: /Users/ave/Library/Logs/myapp/1.2.3
 Site data dir: /Library/Application Support/myapp/1.2.3
 Site data dir (multi path): /Library/Application Support/myapp/1.2.3
-Site config dir: /Library/Application Support/myapp/1.2.3
-Site config dir (multi path): /Library/Application Support/myapp/1.2.3
+Site config dir: /Library/Preferences/myapp/1.2.3
+Site config dir (multi path): /Library/Preferences/myapp/1.2.3
 Shared dir: /Users/Shared/Library/Application Support/myapp/1.2.3
 ```
 - _appAuthor_ parameter is not used on Mac OS X.

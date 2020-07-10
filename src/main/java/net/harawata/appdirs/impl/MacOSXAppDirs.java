@@ -29,7 +29,7 @@ public class MacOSXAppDirs extends AppDirs {
 
   public String getUserConfigDir(String appName, String appVersion,
       String appAuthor, boolean roaming) {
-    return getUserDataDir(appName, appVersion, appAuthor, roaming);
+    return buildPath(home(), "/Library/Preferences", appName, appVersion);
   }
 
   public String getUserCacheDir(String appName, String appVersion,
@@ -44,7 +44,7 @@ public class MacOSXAppDirs extends AppDirs {
 
   public String getSiteConfigDir(String appName, String appVersion,
       String appAuthor, boolean multiPath) {
-    return getSiteDataDir(appName, appVersion, appAuthor, multiPath);
+    return buildPath("/Library/Preferences", appName, appVersion);
   }
 
   public String getUserLogDir(String appName, String appVersion,
