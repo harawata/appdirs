@@ -21,6 +21,26 @@ appDirs.getUserDataDir("<AppName>", null, "<AppAuthor>");
 __AppDirs__ is loosely based on [a python module](https://github.com/ActiveState/appdirs) with the same name.  
 Please use the issue tracker for bug reports or suggestions.
 
+## Installation
+
+### Maven
+
+```xml
+<!-- https://mvnrepository.com/artifact/net.harawata/appdirs -->
+<dependency>
+    <groupId>net.harawata</groupId>
+    <artifactId>appdirs</artifactId>
+    <version>1.2.1</version>
+</dependency>
+```
+
+### Gradle
+
+```groovy
+// https://mvnrepository.com/artifact/net.harawata/appdirs
+implementation group: 'net.harawata', name: 'appdirs', version: '1.2.1'
+```
+
 ## Supported directories.
 
 Currently, __AppDirs__ has the following methods.
