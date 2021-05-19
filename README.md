@@ -21,7 +21,9 @@ appDirs.getUserDataDir("<AppName>", null, "<AppAuthor>");
 __AppDirs__ is loosely based on [a python module](https://github.com/ActiveState/appdirs) with the same name.  
 Please use the issue tracker for bug reports or suggestions.
 
-## Installation
+## Download
+
+__AppDirs__ requires Java SE 6 or later.
 
 ### Maven
 
@@ -40,6 +42,16 @@ Please use the issue tracker for bug reports or suggestions.
 // https://mvnrepository.com/artifact/net.harawata/appdirs
 implementation group: 'net.harawata', name: 'appdirs', version: '1.2.1'
 ```
+
+### Other Dependency Managers and Versions
+
+Snippets for other dependency managers (e.g. SBT, Ivy, ...) and/or versions can be found here: https://mvnrepository.com/artifact/net.harawata/appdirs.
+
+### Manual Installation
+
+You can download all Jar files here: https://github.com/harawata/appdirs/releases.
+
+__AppDirs__ also requires [Java Native Access (JNA)](https://github.com/twall/jna) as its dependency.
 
 ## Supported directories.
 
@@ -147,10 +159,6 @@ Shared dir: /srv/myapp/1.2.3
  - Returns XDG_CONFIG_DIRS for site config directory.
 - _appAuthor_ parameter is not used on Unix/Linux.
 - _roaming_ parameter has no effect on Unix/Linux.
-
-## Requirements
-
-__AppDirs__ requires Java SE 6 or later and [Java Native Access (JNA)](https://github.com/twall/jna) as its dependency.
 
 ## Bug report, feature request, question.
 
