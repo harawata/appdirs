@@ -21,38 +21,6 @@ appDirs.getUserDataDir("<AppName>", null, "<AppAuthor>");
 __AppDirs__ is loosely based on [a python module](https://github.com/ActiveState/appdirs) with the same name.  
 Please use the issue tracker for bug reports or suggestions.
 
-## Download
-
-__AppDirs__ requires Java SE 6 or later.
-
-### Maven
-
-```xml
-<!-- https://mvnrepository.com/artifact/net.harawata/appdirs -->
-<dependency>
-    <groupId>net.harawata</groupId>
-    <artifactId>appdirs</artifactId>
-    <version>1.2.1</version>
-</dependency>
-```
-
-### Gradle
-
-```groovy
-// https://mvnrepository.com/artifact/net.harawata/appdirs
-implementation group: 'net.harawata', name: 'appdirs', version: '1.2.1'
-```
-
-### Other Dependency Managers and Versions
-
-Snippets for other dependency managers (e.g. SBT, Ivy, ...) and/or versions can be found here: https://mvnrepository.com/artifact/net.harawata/appdirs.
-
-### Manual Installation
-
-You can download all Jar files here: https://github.com/harawata/appdirs/releases.
-
-__AppDirs__ also requires [Java Native Access (JNA)](https://github.com/twall/jna) as its dependency.
-
 ## Supported directories.
 
 Currently, __AppDirs__ has the following methods.
@@ -159,6 +127,25 @@ Shared dir: /srv/myapp/1.2.3
  - Returns XDG_CONFIG_DIRS for site config directory.
 - _appAuthor_ parameter is not used on Unix/Linux.
 - _roaming_ parameter has no effect on Unix/Linux.
+
+## Requirements
+
+__AppDirs__ requires Java SE 6 or later and [Java Native Access (JNA)](https://github.com/twall/jna) as its dependency.
+
+## Quickstart
+
+### With a dependency management tool ([Maven](https://maven.apache.org/), [Gradle](https://gradle.org/), etc.)
+
+1. Choose the latest version on the [MvnRepository](https://mvnrepository.com/artifact/net.harawata/appdirs).
+2. From the tabs of dependency management tools, select the one you are using.
+3. Copy the snippet and add it to the dependency list of your project file (`pom.xml`, `build.gradle`, etc.).
+
+### Without a dependency management tool
+
+1. Choose the latest version on the [release page](https://github.com/harawata/appdirs/releases).
+2. Download the `appdirs-(version).jar` file.
+3. You may also need to download [`jna-(version).jar`](https://mvnrepository.com/artifact/net.java.dev.jna/jna) and [`jna-platform-(version).jar`](https://mvnrepository.com/artifact/net.java.dev.jna/jna-platform).
+4. Put all .jar files into the classpath of your application.
 
 ## Bug report, feature request, question.
 
