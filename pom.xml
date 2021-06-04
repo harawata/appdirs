@@ -34,7 +34,7 @@
   <dependencies>
     <dependency>
       <groupId>net.java.dev.jna</groupId>
-      <artifactId>jna-platform</artifactId>
+      <artifactId>jna-platform-jpms</artifactId>
       <version>5.8.0</version>
     </dependency>
     <dependency>
@@ -73,21 +73,14 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.8.1</version>
         <configuration>
-          <source>1.6</source>
-          <target>1.6</target>
+          <source>9</source>
+          <target>9</target>
           <encoding>utf-8</encoding>
         </configuration>
       </plugin>
       <plugin>
         <artifactId>maven-jar-plugin</artifactId>
         <version>3.2.0</version>
-        <configuration>
-          <archive>
-            <manifestEntries>
-              <Automatic-Module-Name>net.harawata.appdirs</Automatic-Module-Name>
-            </manifestEntries>
-          </archive>
-        </configuration>
       </plugin>
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
