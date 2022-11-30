@@ -15,7 +15,7 @@
   </licenses>
   <scm>
     <url>https://github.com/harawata/appdirs</url>
-    <connection>scm:git:git://github.com/harawata/appdirs.git</connection>
+    <connection>scm:git:ssh://github.com/harawata/appdirs.git</connection>
     <developerConnection>scm:git:ssh://git@github.com/harawata/appdirs.git</developerConnection>
     <tag>HEAD</tag>
   </scm>
