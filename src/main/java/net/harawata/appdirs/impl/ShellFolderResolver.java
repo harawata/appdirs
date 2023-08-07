@@ -51,6 +51,8 @@ public class ShellFolderResolver implements WindowsFolderResolver {
       return KnownFolders.FOLDERID_LocalAppData;
     case COMMON_APPDATA:
       return KnownFolders.FOLDERID_ProgramData;
+    case DOWNLOADS:
+      return KnownFolders.FOLDERID_Downloads;
     default:
       throw new AppDirsException(
           "Unknown folder ID " + folderId + " was specified.");

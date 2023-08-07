@@ -20,7 +20,7 @@ public class WindowsAppDirs extends AppDirs {
   private WindowsFolderResolver folderResolver;
 
   public enum FolderId {
-    APPDATA, LOCAL_APPDATA, COMMON_APPDATA;
+    APPDATA, LOCAL_APPDATA, COMMON_APPDATA, DOWNLOADS;
   }
 
   public WindowsAppDirs(WindowsFolderResolver folderResolver) {
@@ -62,6 +62,12 @@ public class WindowsAppDirs extends AppDirs {
   }
 
   @Override
+  public String getUserDownloadsDir(String appName, String appVersion,
+      String appAuthor) {
+    return buildPath(getDownloads(), appAuthor, appName, appVersion);
+  }
+
+  @Override
   public String getSharedDir(String appName, String appVersion,
       String appAuthor) {
     return buildPath(getCommonAppData(), appAuthor, appName, appVersion);
@@ -77,5 +83,9 @@ public class WindowsAppDirs extends AppDirs {
 
   protected String getCommonAppData() {
     return folderResolver.resolveFolder(FolderId.COMMON_APPDATA);
+  }
+
+  protected String getDownloads() {
+    return folderResolver.resolveFolder(FolderId.DOWNLOADS);
   }
 }

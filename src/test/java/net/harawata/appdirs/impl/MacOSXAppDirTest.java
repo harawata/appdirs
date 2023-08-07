@@ -105,6 +105,18 @@ public class MacOSXAppDirTest {
   }
 
   @Test
+  public void testGetUserDownloadsDir() {
+    assertEquals("/Users/somebody/Downloads",
+        appDirs.getUserDownloadsDir(null, null, null));
+    assertEquals("/Users/somebody/Downloads/myapp",
+        appDirs.getUserDownloadsDir("myapp", null, null));
+    assertEquals("/Users/somebody/Downloads/myapp/1.2.3",
+        appDirs.getUserDownloadsDir("myapp", "1.2.3", null));
+    assertEquals("/Users/somebody/Downloads/myapp/1.2.3",
+        appDirs.getUserDownloadsDir("myapp", "1.2.3", "harawata"));
+  }
+
+  @Test
   public void testSiteDataDir() {
     assertEquals("/Library/Application Support",
         appDirs.getSiteDataDir(null, null, null));

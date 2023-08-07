@@ -108,6 +108,19 @@ public class UnixAppDirTest {
   }
 
   @Test
+  public void testGetUserDownloadsDir() {
+    AppDirs appDirs = getAppDirs();
+    assertEquals("/home/somebody/Downloads",
+        appDirs.getUserDownloadsDir(null, null, null));
+    assertEquals("/home/somebody/Downloads/myapp",
+        appDirs.getUserDownloadsDir("myapp", null, null));
+    assertEquals("/home/somebody/Downloads/myapp/1.2.3",
+        appDirs.getUserDownloadsDir("myapp", "1.2.3", null));
+    assertEquals("/home/somebody/Downloads/myapp/1.2.3",
+        appDirs.getUserDownloadsDir("myapp", "1.2.3", "harawata"));
+  }
+
+  @Test
   public void testSiteDataDir() {
     AppDirs appDirs = getAppDirs();
     assertEquals("/usr/local/share", appDirs.getSiteDataDir(null, null, null));
