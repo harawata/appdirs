@@ -123,6 +123,21 @@ public class WindowsAppDirTest {
   }
 
   @Test
+  public void testGetUserDownloadsDir() {
+    assertEquals("C:\\Users\\ave\\Downloads",
+        appDirs.getUserDownloadsDir(null, null, null));
+    assertEquals(
+        "C:\\Users\\ave\\Downloads\\myapp",
+        appDirs.getUserDownloadsDir("myapp", null, null));
+    assertEquals(
+        "C:\\Users\\ave\\Downloads\\myapp\\1.2.3",
+        appDirs.getUserDownloadsDir("myapp", "1.2.3", null));
+    assertEquals(
+        "C:\\Users\\ave\\Downloads\\harawata\\myapp\\1.2.3",
+        appDirs.getUserDownloadsDir("myapp", "1.2.3", "harawata"));
+  }
+
+  @Test
   public void testSiteDataDir() {
     assertEquals("C:\\Documents and Settings\\All Users\\Application Data",
         appDirs.getSiteDataDir(null, null, null));
@@ -175,7 +190,7 @@ public class WindowsAppDirTest {
   }
 
   @Test
-  public void testgetSharedDir() {
+  public void testGetSharedDir() {
     assertEquals("C:\\Documents and Settings\\All Users\\Application Data",
         appDirs.getSharedDir(null, null, null));
     assertEquals(

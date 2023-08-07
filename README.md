@@ -48,9 +48,10 @@ Currently, __AppDirs__ has the following methods.
 - getUserConfigDir
 - getUserCacheDir
 - getUserLogDir
+- getUserDownloadsDir (since 1.2.2)
 - getSiteDataDir
 - getSiteConfigDir
-- getSharedDir
+- getSharedDir (since 1.1.0)
 
 Here is a test program and the output on some platforms.
 
@@ -72,6 +73,8 @@ public class AppDirTest {
       + appDirs.getUserCacheDir("myapp", "1.2.3", "harawata"));
     System.out.println("User log dir: "
       + appDirs.getUserLogDir("myapp", "1.2.3", "harawata"));
+    System.out.println("User downloads dir: "
+      + appDirs.getUserDownloadsDir("myapp", "1.2.3", "harawata"));
     System.out.println("Site data dir: "
       + appDirs.getSiteDataDir("myapp", "1.2.3", "harawata"));
     System.out.println("Site data dir (multi path): "
@@ -95,6 +98,7 @@ User config dir: /Users/ave/Library/Preferences/myapp/1.2.3
 User config dir (roaming): /Users/ave/Library/Preferences/myapp/1.2.3
 User cache dir: /Users/ave/Library/Caches/myapp/1.2.3
 User log dir: /Users/ave/Library/Logs/myapp/1.2.3
+User downloads dir: /Users/ave/Downloads/myapp/1.2.3
 Site data dir: /Library/Application Support/myapp/1.2.3
 Site data dir (multi path): /Library/Application Support/myapp/1.2.3
 Site config dir: /Library/Preferences/myapp/1.2.3
@@ -112,6 +116,7 @@ User config dir: C:\Users\ave\AppData\Local\harawata\myapp\1.2.3
 User config dir (roaming): C:\Users\ave\AppData\Roaming\harawata\myapp\1.2.3
 User cache dir: C:\Users\ave\AppData\Local\harawata\myapp\Cache\1.2.3
 User log dir: C:\Users\ave\AppData\Local\harawata\myapp\Logs\1.2.3
+User downloads dir: C:\Users\ave\Downloads\harawata\myapp\1.2.3
 Site data dir: C:\ProgramData\harawata\myapp\1.2.3
 Site data dir (multi path): C:\ProgramData\harawata\myapp\1.2.3
 Site config dir: C:\ProgramData\harawata\myapp\1.2.3
@@ -121,6 +126,7 @@ Shared dir: C:\ProgramData\harawata\myapp\1.2.3
 - Internally calls [SHGetFolderPath](http://msdn.microsoft.com/en-us/library/bb762181%28VS.85%29.aspx) via [Java Native Access (JNA)](https://github.com/twall/jna).
  - Returns CSIDL_LOCAL_APPDATA or CSIDL_APPDATA for user directories.
  - Returns CSIDL_COMMON_APPDATA for site directories.
+ - Returns KNOWNFOLDERID `374DE290-123F-4565-9164-39C4925E467B` for user downloads directory. Not supported on pre-Vista OSes.
 - _multiPath_ parameter has no effect on Windows.
 
 ### Output on Linux (username = ave, with no XDG environment variables defined)
@@ -131,6 +137,7 @@ User config dir: /home/ave/.config/myapp/1.2.3
 User config dir (roaming): /home/ave/.config/myapp/1.2.3
 User cache dir: /home/ave/.cache/myapp/1.2.3
 User log dir: /home/ave/.cache/myapp/logs/1.2.3
+User downloads dir: /home/ave/Downloads/myapp/1.2.3
 Site data dir: /usr/local/share/myapp/1.2.3
 Site data dir (multi path): /usr/local/share/myapp/1.2.3:/usr/share/myapp/1.2.3
 Site config dir: /etc/xdg/myapp/1.2.3
@@ -144,6 +151,7 @@ Shared dir: /srv/myapp/1.2.3
  - Returns XDG_CACHE_HOME for user cache directory.
  - Returns XDG_DATA_DIRS for site data directory.
  - Returns XDG_CONFIG_DIRS for site config directory.
+ - Returns XDG_DOWNLOAD_DIR for user downloads directory.
 - _appAuthor_ parameter is not used on Unix/Linux.
 - _roaming_ parameter has no effect on Unix/Linux.
 

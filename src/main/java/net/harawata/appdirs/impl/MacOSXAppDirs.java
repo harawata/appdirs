@@ -53,6 +53,12 @@ public class MacOSXAppDirs extends AppDirs {
   }
 
   @Override
+  public String getUserDownloadsDir(String appName, String appVersion,
+      String appAuthor) {
+    return buildPath(home(), "/Downloads", appName, appVersion);
+  }
+
+  @Override
   public String getSharedDir(String appName, String appVersion,
       String appAuthor) {
     return buildPath("/Users/Shared/Library/Application Support", appName,

@@ -26,6 +26,8 @@ public class MockWindowsFolderResolver implements WindowsFolderResolver {
       return "C:\\Documents and Settings\\harawata\\Local Settings\\Application Data";
     case COMMON_APPDATA:
       return "C:\\Documents and Settings\\All Users\\Application Data";
+    case DOWNLOADS:
+      return "C:\\Users\\ave\\Downloads";
     default:
       throw new AppDirsException(
           "Unknown folder ID " + folderId + " was specified.");

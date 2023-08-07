@@ -29,6 +29,8 @@ public class UnixAppDirs extends AppDirs {
 
   public static final String XDG_DATA_HOME = "XDG_DATA_HOME";
 
+  public static final String XDG_DOWNLOAD_DIR = "XDG_DOWNLOAD_DIR";
+
   protected final Map<String, String> sysEnv;
 
   public String getUserDataDir(String appName, String appVersion,
@@ -96,6 +98,13 @@ public class UnixAppDirs extends AppDirs {
       String appAuthor) {
     String dir = getOrDefault(XDG_CACHE_HOME, buildPath(home(), "/.cache"));
     return buildPath(dir, appName, "/logs", appVersion);
+  }
+
+  @Override
+  public String getUserDownloadsDir(String appName, String appVersion,
+      String appAuthor) {
+    String dir = getOrDefault(XDG_DOWNLOAD_DIR, buildPath(home(), "/Downloads"));
+    return buildPath(dir, appName, appVersion);
   }
 
   @Override
