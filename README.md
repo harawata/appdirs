@@ -23,7 +23,8 @@ Please use the issue tracker for bug reports or suggestions.
 
 ## Requirements
 
-__AppDirs__ requires Java SE 6 or later and [Java Native Access (JNA)](https://github.com/twall/jna) as its dependency.
+- Java 8 (since 1.3.0)
+- [Java Native Access (JNA)](https://github.com/twall/jna) as its dependency.
 
 ## Quickstart
 
