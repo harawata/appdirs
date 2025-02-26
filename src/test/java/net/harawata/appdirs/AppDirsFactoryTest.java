@@ -29,28 +29,28 @@ public class AppDirsFactoryTest {
   @Test
   public void testGetInstance_MacOSX() {
     assumeTrue(SystemUtils.IS_OS_MAC_OSX);
-    AppDirs appDirs = AppDirsFactory.getInstance();
+    AppDirs appDirs = AppDirsFactory.INSTANCE.getAppDirs();
     assertEquals(MacOSXAppDirs.class, appDirs.getClass());
   }
 
   @Test
   public void testGetInstance_Unix() {
     assumeFalse(SystemUtils.IS_OS_MAC_OSX || SystemUtils.IS_OS_WINDOWS);
-    AppDirs appDirs = AppDirsFactory.getInstance();
+    AppDirs appDirs = AppDirsFactory.INSTANCE.getAppDirs();
     assertEquals(UnixAppDirs.class, appDirs.getClass());
   }
 
   @Test
   public void testGetInstance_Windows() {
     assumeTrue(SystemUtils.IS_OS_WINDOWS);
-    AppDirs appDirs = AppDirsFactory.getInstance();
+    AppDirs appDirs = AppDirsFactory.INSTANCE.getAppDirs();
     assertEquals(WindowsAppDirs.class, appDirs.getClass());
   }
 
   @Test
   public void verifySingleton() {
-    AppDirs appDirs1 = AppDirsFactory.getInstance();
-    AppDirs appDirs2 = AppDirsFactory.getInstance();
+    AppDirs appDirs1 = AppDirsFactory.INSTANCE.getAppDirs();
+    AppDirs appDirs2 = AppDirsFactory.INSTANCE.getAppDirs();
     assertSame(appDirs1, appDirs2);
   }
 }

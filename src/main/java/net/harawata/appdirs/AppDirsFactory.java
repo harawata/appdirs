@@ -20,37 +20,30 @@ import net.harawata.appdirs.impl.UnixAppDirs;
 import net.harawata.appdirs.impl.WindowsAppDirs;
 import net.harawata.appdirs.impl.WindowsFolderResolver;
 
-public class AppDirsFactory {
-  private AppDirsFactory() {
-    super();
+/**
+ * @implNote Factor implemented as enum to ensure thread safety and lazy initialization.
+ *           Details at <a href="https://stackoverflow.com/a/50951454/873282">stackoverflow answer</a>.
+ *           <a href="https://softwareengineering.stackexchange.com/a/401799/52607">A factory does not need to create a new instance every time.</a>
+ */
+public enum AppDirsFactory {
+  INSTANCE;
+
+  public AppDirs getAppDirs() {
+    return APP_DIRS_INSTANCE;
   }
 
-  /**
-   * @return platform dependent implementation of <code>AppDirs</code>. Since
-   *         1.4.0, the same instance is returned for repeated invocations.
-   */
-  public static AppDirs getInstance() {
-    return Holder.INSTANCE;
-  }
+  private static final AppDirs APP_DIRS_INSTANCE = create();
 
-  /** Singleton instance holder. */
-  private static class Holder {
-    static final AppDirs INSTANCE = create();
-
-    static AppDirs create() {
-      String os = System.getProperty("os.name").toLowerCase();
-      if (os.startsWith("mac os x")) {
-        return new MacOSXAppDirs();
-      } else if (os.startsWith("windows")) {
-        WindowsFolderResolver folderResolver = new ShellFolderResolver();
-        return new WindowsAppDirs(folderResolver);
-      } else {
-        // Assume other *nix.
-        return new UnixAppDirs();
-      }
-    }
-
-    private Holder() {
+  private static AppDirs create() {
+    String os = System.getProperty("os.name").toLowerCase();
+    if (os.startsWith("mac os x")) {
+      return new MacOSXAppDirs();
+    } else if (os.startsWith("windows")) {
+      WindowsFolderResolver folderResolver = new ShellFolderResolver();
+      return new WindowsAppDirs(folderResolver);
+    } else {
+      // Assume other *nix.
+      return new UnixAppDirs();
     }
   }
 }

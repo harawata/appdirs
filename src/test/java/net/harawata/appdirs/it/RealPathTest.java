@@ -30,7 +30,7 @@ public class RealPathTest {
 
   @BeforeClass
   public static void init() {
-    appDirs = AppDirsFactory.getInstance();
+    appDirs = AppDirsFactory.INSTANCE.getAppDirs();
     home = System.getProperty("user.home");
   }
 

@@ -15,7 +15,7 @@ On Unix/Linux : ```/home/<account>/.local/share/<AppName>```
 With __AppDirs__, you can get the path depending on the runtime platform with the following code.
 
 ``` java
-AppDirs appDirs = AppDirsFactory.getInstance();
+AppDirs appDirs = AppDirsFactory.INSTANCE.getAppDirs();
 appDirs.getUserDataDir("<AppName>", null, "<AppAuthor>");
 ```
 __AppDirs__ is loosely based on [a python module](https://github.com/ActiveState/appdirs) with the same name.  
@@ -62,7 +62,7 @@ import net.harawata.appdirs.AppDirsFactory;
 
 public class AppDirTest {
   public static void main(String[] args) {
-    AppDirs appDirs = AppDirsFactory.getInstance();
+    AppDirs appDirs = AppDirsFactory.INSTANCE.getAppDirs();
     System.out.println("User data dir: " + appDirs.getUserDataDir("myapp", "1.2.3", "harawata"));
     System.out.println("User data dir (roaming): "
       + appDirs.getUserDataDir("myapp", "1.2.3", "harawata", true));
