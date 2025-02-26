@@ -15,8 +15,9 @@
 package net.harawata.appdirs;
 
 import static org.junit.Assert.*;
+import static org.junit.Assume.*;
 
-import org.junit.After;
+import org.apache.commons.lang3.SystemUtils;
 import org.junit.Test;
 
 import net.harawata.appdirs.impl.MacOSXAppDirs;
@@ -24,31 +25,32 @@ import net.harawata.appdirs.impl.UnixAppDirs;
 import net.harawata.appdirs.impl.WindowsAppDirs;
 
 public class AppDirsFactoryTest {
-  private static String origOs;
 
   @Test
   public void testGetInstance_MacOSX() {
-    origOs = System.setProperty("os.name", "Mac OS X");
+    assumeTrue(SystemUtils.IS_OS_MAC_OSX);
     AppDirs appDirs = AppDirsFactory.getInstance();
     assertEquals(MacOSXAppDirs.class, appDirs.getClass());
   }
 
   @Test
   public void testGetInstance_Unix() {
-    origOs = System.setProperty("os.name", "OpenBSD");
+    assumeFalse(SystemUtils.IS_OS_MAC_OSX || SystemUtils.IS_OS_WINDOWS);
     AppDirs appDirs = AppDirsFactory.getInstance();
     assertEquals(UnixAppDirs.class, appDirs.getClass());
   }
 
   @Test
   public void testGetInstance_Windows() {
-    origOs = System.setProperty("os.name", "Windows 7");
+    assumeTrue(SystemUtils.IS_OS_WINDOWS);
     AppDirs appDirs = AppDirsFactory.getInstance();
     assertEquals(WindowsAppDirs.class, appDirs.getClass());
   }
 
-  @After
-  public void resetProperty() {
-    System.setProperty("os.name", origOs);
+  @Test
+  public void verifySingleton() {
+    AppDirs appDirs1 = AppDirsFactory.getInstance();
+    AppDirs appDirs2 = AppDirsFactory.getInstance();
+    assertSame(appDirs1, appDirs2);
   }
 }

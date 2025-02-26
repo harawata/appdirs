@@ -25,16 +25,32 @@ public class AppDirsFactory {
     super();
   }
 
+  /**
+   * @return platform dependent implementation of <code>AppDirs</code>. Since
+   *         1.4.0, the same instance is returned for repeated invocations.
+   */
   public static AppDirs getInstance() {
-    String os = System.getProperty("os.name").toLowerCase();
-    if (os.startsWith("mac os x")) {
-      return new MacOSXAppDirs();
-    } else if (os.startsWith("windows")) {
-      WindowsFolderResolver folderResolver = new ShellFolderResolver();
-      return new WindowsAppDirs(folderResolver);
-    } else {
-      // Assume other *nix.
-      return new UnixAppDirs();
+    return Holder.INSTANCE;
+  }
+
+  /** Singleton instance holder. */
+  private static class Holder {
+    static final AppDirs INSTANCE = create();
+
+    static AppDirs create() {
+      String os = System.getProperty("os.name").toLowerCase();
+      if (os.startsWith("mac os x")) {
+        return new MacOSXAppDirs();
+      } else if (os.startsWith("windows")) {
+        WindowsFolderResolver folderResolver = new ShellFolderResolver();
+        return new WindowsAppDirs(folderResolver);
+      } else {
+        // Assume other *nix.
+        return new UnixAppDirs();
+      }
+    }
+
+    private Holder() {
     }
   }
 }
