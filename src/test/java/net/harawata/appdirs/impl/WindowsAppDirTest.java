@@ -14,30 +14,30 @@
 
 package net.harawata.appdirs.impl;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-public class WindowsAppDirTest {
+class WindowsAppDirTest {
   private static String origFileSeparator;
 
   private WindowsAppDirs appDirs;
 
-  @BeforeClass
-  public static void setUp() {
+  @BeforeAll
+  static void setUp() {
     origFileSeparator = System.setProperty("file.separator", "\\");
   }
 
-  @Before
-  public void pre() {
+  @BeforeEach
+  void pre() {
     appDirs = new WindowsAppDirs(new MockWindowsFolderResolver());
   }
 
   @Test
-  public void testGetUserDataDir() {
+  void testGetUserDataDir() {
     assertEquals(
         "C:\\Documents and Settings\\harawata\\Local Settings\\Application Data",
         appDirs.getUserDataDir(null, null, null));
@@ -64,7 +64,7 @@ public class WindowsAppDirTest {
   }
 
   @Test
-  public void testGetUserConfigDir() {
+  void testGetUserConfigDir() {
     assertEquals(
         "C:\\Documents and Settings\\harawata\\Local Settings\\Application Data",
         appDirs.getUserConfigDir(null, null, null));
@@ -91,7 +91,7 @@ public class WindowsAppDirTest {
   }
 
   @Test
-  public void testGetUserCacheDir() {
+  void testGetUserCacheDir() {
     assertEquals(
         "C:\\Documents and Settings\\harawata\\Local Settings\\Application Data\\Cache",
         appDirs.getUserCacheDir(null, null, null));
@@ -107,7 +107,7 @@ public class WindowsAppDirTest {
   }
 
   @Test
-  public void testGetUserLogDir() {
+  void testGetUserLogDir() {
     assertEquals(
         "C:\\Documents and Settings\\harawata\\Local Settings\\Application Data\\Logs",
         appDirs.getUserLogDir(null, null, null));
@@ -123,22 +123,19 @@ public class WindowsAppDirTest {
   }
 
   @Test
-  public void testGetUserDownloadsDir() {
+  void testGetUserDownloadsDir() {
     assertEquals("C:\\Users\\ave\\Downloads",
         appDirs.getUserDownloadsDir(null, null, null));
-    assertEquals(
-        "C:\\Users\\ave\\Downloads\\myapp",
+    assertEquals("C:\\Users\\ave\\Downloads\\myapp",
         appDirs.getUserDownloadsDir("myapp", null, null));
-    assertEquals(
-        "C:\\Users\\ave\\Downloads\\myapp\\1.2.3",
+    assertEquals("C:\\Users\\ave\\Downloads\\myapp\\1.2.3",
         appDirs.getUserDownloadsDir("myapp", "1.2.3", null));
-    assertEquals(
-        "C:\\Users\\ave\\Downloads\\harawata\\myapp\\1.2.3",
+    assertEquals("C:\\Users\\ave\\Downloads\\harawata\\myapp\\1.2.3",
         appDirs.getUserDownloadsDir("myapp", "1.2.3", "harawata"));
   }
 
   @Test
-  public void testSiteDataDir() {
+  void testSiteDataDir() {
     assertEquals("C:\\Documents and Settings\\All Users\\Application Data",
         appDirs.getSiteDataDir(null, null, null));
     assertEquals("C:\\Documents and Settings\\All Users\\Application Data",
@@ -164,7 +161,7 @@ public class WindowsAppDirTest {
   }
 
   @Test
-  public void testSiteConfigDir() {
+  void testSiteConfigDir() {
     assertEquals("C:\\Documents and Settings\\All Users\\Application Data",
         appDirs.getSiteConfigDir(null, null, null));
     assertEquals("C:\\Documents and Settings\\All Users\\Application Data",
@@ -190,7 +187,7 @@ public class WindowsAppDirTest {
   }
 
   @Test
-  public void testGetSharedDir() {
+  void testGetSharedDir() {
     assertEquals("C:\\Documents and Settings\\All Users\\Application Data",
         appDirs.getSharedDir(null, null, null));
     assertEquals(
@@ -204,8 +201,8 @@ public class WindowsAppDirTest {
         appDirs.getSharedDir("myapp", "1.2.3", "harawata"));
   }
 
-  @AfterClass
-  public static void tearDown() {
+  @AfterAll
+  static void tearDown() {
     if (origFileSeparator == null)
       System.clearProperty("file.separator");
     else

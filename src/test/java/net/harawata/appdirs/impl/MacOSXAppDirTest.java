@@ -14,34 +14,35 @@
 
 package net.harawata.appdirs.impl;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 import net.harawata.appdirs.AppDirs;
 
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-
-public class MacOSXAppDirTest {
+class MacOSXAppDirTest {
   private static String origHome;
 
   private static String origFileSeparator;
 
   private AppDirs appDirs;
 
-  @BeforeClass
-  public static void setUp() {
+  @BeforeAll
+  static void setUp() {
     origHome = System.setProperty("user.home", "/Users/somebody");
     origFileSeparator = System.setProperty("file.separator", "/");
   }
 
-  @Before
-  public void pre() {
+  @BeforeEach
+  void pre() {
     appDirs = new MacOSXAppDirs();
   }
 
   @Test
-  public void testGetUserDataDir() {
+  void testGetUserDataDir() {
     assertEquals("/Users/somebody/Library/Application Support",
         appDirs.getUserDataDir(null, null, null));
     assertEquals("/Users/somebody/Library/Application Support",
@@ -61,7 +62,7 @@ public class MacOSXAppDirTest {
   }
 
   @Test
-  public void testGetUserConfigDir() {
+  void testGetUserConfigDir() {
     assertEquals("/Users/somebody/Library/Preferences",
         appDirs.getUserConfigDir(null, null, null));
     assertEquals("/Users/somebody/Library/Preferences",
@@ -81,7 +82,7 @@ public class MacOSXAppDirTest {
   }
 
   @Test
-  public void testGetUserCacheDir() {
+  void testGetUserCacheDir() {
     assertEquals("/Users/somebody/Library/Caches",
         appDirs.getUserCacheDir(null, null, null));
     assertEquals("/Users/somebody/Library/Caches/myapp",
@@ -93,7 +94,7 @@ public class MacOSXAppDirTest {
   }
 
   @Test
-  public void testGetUserLogDir() {
+  void testGetUserLogDir() {
     assertEquals("/Users/somebody/Library/Logs",
         appDirs.getUserLogDir(null, null, null));
     assertEquals("/Users/somebody/Library/Logs/myapp",
@@ -105,7 +106,7 @@ public class MacOSXAppDirTest {
   }
 
   @Test
-  public void testGetUserDownloadsDir() {
+  void testGetUserDownloadsDir() {
     assertEquals("/Users/somebody/Downloads",
         appDirs.getUserDownloadsDir(null, null, null));
     assertEquals("/Users/somebody/Downloads/myapp",
@@ -117,7 +118,7 @@ public class MacOSXAppDirTest {
   }
 
   @Test
-  public void testSiteDataDir() {
+  void testSiteDataDir() {
     assertEquals("/Library/Application Support",
         appDirs.getSiteDataDir(null, null, null));
     assertEquals("/Library/Application Support",
@@ -137,7 +138,7 @@ public class MacOSXAppDirTest {
   }
 
   @Test
-  public void testSiteConfigDir() {
+  void testSiteConfigDir() {
     assertEquals("/Library/Preferences",
         appDirs.getSiteConfigDir(null, null, null));
     assertEquals("/Library/Preferences",
@@ -157,7 +158,7 @@ public class MacOSXAppDirTest {
   }
 
   @Test
-  public void testgetSharedDir() {
+  void testgetSharedDir() {
     assertEquals("/Users/Shared/Library/Application Support",
         appDirs.getSharedDir(null, null, null));
     assertEquals("/Users/Shared/Library/Application Support/myapp",
@@ -168,8 +169,8 @@ public class MacOSXAppDirTest {
         appDirs.getSharedDir("myapp", "1.2.3", "harawata"));
   }
 
-  @AfterClass
-  public static void tearDown() {
+  @AfterAll
+  static void tearDown() {
     if (origHome == null)
       System.clearProperty("user.home");
     else

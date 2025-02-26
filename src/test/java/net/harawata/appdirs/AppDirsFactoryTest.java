@@ -14,41 +14,41 @@
 
 package net.harawata.appdirs;
 
-import static org.junit.Assert.*;
-import static org.junit.Assume.*;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assumptions.*;
 
 import org.apache.commons.lang3.SystemUtils;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import net.harawata.appdirs.impl.MacOSXAppDirs;
 import net.harawata.appdirs.impl.UnixAppDirs;
 import net.harawata.appdirs.impl.WindowsAppDirs;
 
-public class AppDirsFactoryTest {
+class AppDirsFactoryTest {
 
   @Test
-  public void testGetInstance_MacOSX() {
+  void testGetInstance_MacOSX() {
     assumeTrue(SystemUtils.IS_OS_MAC_OSX);
     AppDirs appDirs = AppDirsFactory.getInstance();
     assertEquals(MacOSXAppDirs.class, appDirs.getClass());
   }
 
   @Test
-  public void testGetInstance_Unix() {
+  void testGetInstance_Unix() {
     assumeFalse(SystemUtils.IS_OS_MAC_OSX || SystemUtils.IS_OS_WINDOWS);
     AppDirs appDirs = AppDirsFactory.getInstance();
     assertEquals(UnixAppDirs.class, appDirs.getClass());
   }
 
   @Test
-  public void testGetInstance_Windows() {
+  void testGetInstance_Windows() {
     assumeTrue(SystemUtils.IS_OS_WINDOWS);
     AppDirs appDirs = AppDirsFactory.getInstance();
     assertEquals(WindowsAppDirs.class, appDirs.getClass());
   }
 
   @Test
-  public void verifySingleton() {
+  void verifySingleton() {
     AppDirs appDirs1 = AppDirsFactory.getInstance();
     AppDirs appDirs2 = AppDirsFactory.getInstance();
     assertSame(appDirs1, appDirs2);

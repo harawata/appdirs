@@ -14,33 +14,33 @@
 
 package net.harawata.appdirs.impl;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import net.harawata.appdirs.AppDirs;
 
-public class UnixAppDirTest {
+class UnixAppDirTest {
   private static String origHome;
 
   private static String origFileSeparator;
 
   private static String origPathSeparator;
 
-  @BeforeClass
-  public static void setUp() {
+  @BeforeAll
+  static void setUp() {
     origHome = System.setProperty("user.home", "/home/somebody");
     origFileSeparator = System.setProperty("file.separator", "/");
     origPathSeparator = System.setProperty("path.separator", ":");
   }
 
   @Test
-  public void testGetUserDataDir() {
+  void testGetUserDataDir() {
     AppDirs appDirs = getAppDirs();
     assertEquals("/home/somebody/.local/share",
         appDirs.getUserDataDir(null, null, null));
@@ -61,7 +61,7 @@ public class UnixAppDirTest {
   }
 
   @Test
-  public void testGetUserConfigDir() {
+  void testGetUserConfigDir() {
     AppDirs appDirs = getAppDirs();
     assertEquals("/home/somebody/.config",
         appDirs.getUserConfigDir(null, null, null));
@@ -82,7 +82,7 @@ public class UnixAppDirTest {
   }
 
   @Test
-  public void testGetUserCacheDir() {
+  void testGetUserCacheDir() {
     AppDirs appDirs = getAppDirs();
     assertEquals("/home/somebody/.cache",
         appDirs.getUserCacheDir(null, null, null));
@@ -95,7 +95,7 @@ public class UnixAppDirTest {
   }
 
   @Test
-  public void testGetUserLogDir() {
+  void testGetUserLogDir() {
     AppDirs appDirs = getAppDirs();
     assertEquals("/home/somebody/.cache/logs",
         appDirs.getUserLogDir(null, null, null));
@@ -108,7 +108,7 @@ public class UnixAppDirTest {
   }
 
   @Test
-  public void testGetUserDownloadsDir() {
+  void testGetUserDownloadsDir() {
     AppDirs appDirs = getAppDirs();
     assertEquals("/home/somebody/Downloads",
         appDirs.getUserDownloadsDir(null, null, null));
@@ -121,7 +121,7 @@ public class UnixAppDirTest {
   }
 
   @Test
-  public void testSiteDataDir() {
+  void testSiteDataDir() {
     AppDirs appDirs = getAppDirs();
     assertEquals("/usr/local/share", appDirs.getSiteDataDir(null, null, null));
     assertEquals("/usr/local/share:/usr/share",
@@ -141,7 +141,7 @@ public class UnixAppDirTest {
   }
 
   @Test
-  public void testSiteConfigDir() {
+  void testSiteConfigDir() {
     AppDirs appDirs = getAppDirs();
     assertEquals("/etc/xdg", appDirs.getSiteConfigDir(null, null, null));
     assertEquals("/etc/xdg", appDirs.getSiteConfigDir(null, null, null, true));
@@ -160,7 +160,7 @@ public class UnixAppDirTest {
   }
 
   @Test
-  public void testEnvironmentVariables() {
+  void testEnvironmentVariables() {
     Map<String, String> vars = new HashMap<String, String>();
     vars.put(UnixAppDirs.XDG_DATA_HOME, "/data_home");
     vars.put(UnixAppDirs.XDG_CONFIG_HOME, "/config_home");
@@ -188,7 +188,7 @@ public class UnixAppDirTest {
   }
 
   @Test
-  public void testgetSharedDir() {
+  void testgetSharedDir() {
     AppDirs appDirs = getAppDirs();
     assertEquals("/srv", appDirs.getSharedDir(null, null, null));
     assertEquals("/srv/myapp", appDirs.getSharedDir("myapp", null, null));
@@ -206,8 +206,8 @@ public class UnixAppDirTest {
     return new UnixAppDirs(envVars);
   }
 
-  @AfterClass
-  public static void tearDown() {
+  @AfterAll
+  static void tearDown() {
     if (origHome == null)
       System.clearProperty("user.home");
     else
