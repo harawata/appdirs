@@ -14,6 +14,9 @@ jobs:
           server-id: central 
           server-username: MAVEN_USERNAME
           server-password: MAVEN_PASSWORD
+      - name: Run xdg-user-dir on ubuntu
+        if: runner.os == 'Linux'
+        run: xdg-user-dirs-update
       - name: Deploy snapshot
         run: mvn -B deploy
         env:
