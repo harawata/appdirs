@@ -26,7 +26,7 @@ import org.junit.jupiter.api.Test;
 import net.harawata.appdirs.AppDirs;
 
 class UnixAppDirTest {
-  private static String origHome;
+  private static String home;
 
   private static String origFileSeparator;
 
@@ -34,7 +34,7 @@ class UnixAppDirTest {
 
   @BeforeAll
   static void setUp() {
-    origHome = System.setProperty("user.home", "/home/somebody");
+    home= System.getProperty("user.home");
     origFileSeparator = System.setProperty("file.separator", "/");
     origPathSeparator = System.setProperty("path.separator", ":");
   }
@@ -42,81 +42,81 @@ class UnixAppDirTest {
   @Test
   void testGetUserDataDir() {
     AppDirs appDirs = getAppDirs();
-    assertEquals("/home/somebody/.local/share",
+    assertEquals(home + "/.local/share",
         appDirs.getUserDataDir(null, null, null));
-    assertEquals("/home/somebody/.local/share",
+    assertEquals(home + "/.local/share",
         appDirs.getUserDataDir(null, null, null, true));
-    assertEquals("/home/somebody/.local/share/myapp",
+    assertEquals(home + "/.local/share/myapp",
         appDirs.getUserDataDir("myapp", null, null));
-    assertEquals("/home/somebody/.local/share/myapp",
+    assertEquals(home + "/.local/share/myapp",
         appDirs.getUserDataDir("myapp", null, null, true));
-    assertEquals("/home/somebody/.local/share/myapp/1.2.3",
+    assertEquals(home + "/.local/share/myapp/1.2.3",
         appDirs.getUserDataDir("myapp", "1.2.3", null));
-    assertEquals("/home/somebody/.local/share/myapp/1.2.3",
+    assertEquals(home + "/.local/share/myapp/1.2.3",
         appDirs.getUserDataDir("myapp", "1.2.3", null, true));
-    assertEquals("/home/somebody/.local/share/myapp/1.2.3",
+    assertEquals(home + "/.local/share/myapp/1.2.3",
         appDirs.getUserDataDir("myapp", "1.2.3", "harawata"));
-    assertEquals("/home/somebody/.local/share/myapp/1.2.3",
+    assertEquals(home + "/.local/share/myapp/1.2.3",
         appDirs.getUserDataDir("myapp", "1.2.3", "harawata", true));
   }
 
   @Test
   void testGetUserConfigDir() {
     AppDirs appDirs = getAppDirs();
-    assertEquals("/home/somebody/.config",
+    assertEquals(home + "/.config",
         appDirs.getUserConfigDir(null, null, null));
-    assertEquals("/home/somebody/.config",
+    assertEquals(home + "/.config",
         appDirs.getUserConfigDir(null, null, null, true));
-    assertEquals("/home/somebody/.config/myapp",
+    assertEquals(home + "/.config/myapp",
         appDirs.getUserConfigDir("myapp", null, null));
-    assertEquals("/home/somebody/.config/myapp",
+    assertEquals(home + "/.config/myapp",
         appDirs.getUserConfigDir("myapp", null, null, true));
-    assertEquals("/home/somebody/.config/myapp/1.2.3",
+    assertEquals(home + "/.config/myapp/1.2.3",
         appDirs.getUserConfigDir("myapp", "1.2.3", null));
-    assertEquals("/home/somebody/.config/myapp/1.2.3",
+    assertEquals(home + "/.config/myapp/1.2.3",
         appDirs.getUserConfigDir("myapp", "1.2.3", null, true));
-    assertEquals("/home/somebody/.config/myapp/1.2.3",
+    assertEquals(home + "/.config/myapp/1.2.3",
         appDirs.getUserConfigDir("myapp", "1.2.3", "harawata"));
-    assertEquals("/home/somebody/.config/myapp/1.2.3",
+    assertEquals(home + "/.config/myapp/1.2.3",
         appDirs.getUserConfigDir("myapp", "1.2.3", "harawata", true));
   }
 
   @Test
   void testGetUserCacheDir() {
     AppDirs appDirs = getAppDirs();
-    assertEquals("/home/somebody/.cache",
+    assertEquals(home + "/.cache",
         appDirs.getUserCacheDir(null, null, null));
-    assertEquals("/home/somebody/.cache/myapp",
+    assertEquals(home + "/.cache/myapp",
         appDirs.getUserCacheDir("myapp", null, null));
-    assertEquals("/home/somebody/.cache/myapp/1.2.3",
+    assertEquals(home + "/.cache/myapp/1.2.3",
         appDirs.getUserCacheDir("myapp", "1.2.3", null));
-    assertEquals("/home/somebody/.cache/myapp/1.2.3",
+    assertEquals(home + "/.cache/myapp/1.2.3",
         appDirs.getUserCacheDir("myapp", "1.2.3", "harawata"));
   }
 
   @Test
   void testGetUserLogDir() {
     AppDirs appDirs = getAppDirs();
-    assertEquals("/home/somebody/.cache/logs",
+    assertEquals(home + "/.cache/logs",
         appDirs.getUserLogDir(null, null, null));
-    assertEquals("/home/somebody/.cache/myapp/logs",
+    assertEquals(home + "/.cache/myapp/logs",
         appDirs.getUserLogDir("myapp", null, null));
-    assertEquals("/home/somebody/.cache/myapp/logs/1.2.3",
+    assertEquals(home + "/.cache/myapp/logs/1.2.3",
         appDirs.getUserLogDir("myapp", "1.2.3", null));
-    assertEquals("/home/somebody/.cache/myapp/logs/1.2.3",
+    assertEquals(home + "/.cache/myapp/logs/1.2.3",
         appDirs.getUserLogDir("myapp", "1.2.3", "harawata"));
   }
 
   @Test
   void testGetUserDownloadsDir() {
     AppDirs appDirs = getAppDirs();
-    assertEquals("/home/somebody/Downloads",
+    assertEquals(home + "/Downloads",
         appDirs.getUserDownloadsDir(null, null, null));
-    assertEquals("/home/somebody/Downloads/myapp",
+    assertEquals(home + "/Downloads/myapp",
         appDirs.getUserDownloadsDir("myapp", null, null));
-    assertEquals("/home/somebody/Downloads/myapp/1.2.3",
+    assertEquals(home + "/Downloads/myapp/1.2.3",
         appDirs.getUserDownloadsDir("myapp", "1.2.3", null));
-    assertEquals("/home/somebody/Downloads/myapp/1.2.3",
+    assertEquals(home + "/Downloads/myapp/1.2.3",
         appDirs.getUserDownloadsDir("myapp", "1.2.3", "harawata"));
   }
 
@@ -208,11 +208,6 @@ class UnixAppDirTest {
 
   @AfterAll
   static void tearDown() {
-    if (origHome == null)
-      System.clearProperty("user.home");
-    else
-      System.setProperty("user.home", origHome);
-
     if (origFileSeparator == null)
       System.clearProperty("file.separator");
     else
