@@ -14,9 +14,9 @@
 
 package net.harawata.appdirs.impl;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.Reader;
 import java.util.Map;
 
 import net.harawata.appdirs.AppDirs;
@@ -130,14 +130,14 @@ public class UnixAppDirs extends AppDirs {
     builder.redirectErrorStream(true);
     try {
       Process process = builder.start();
-      StringBuilder sb = new StringBuilder();
+      String result = null;
       // Assuming the default charset.
-      try (Reader reader = new InputStreamReader(process.getInputStream())) {
-        for (int ch; (ch = reader.read()) != -1;) {
-          sb.append((char) ch);
-        }
+      try (BufferedReader reader = new BufferedReader(
+          new InputStreamReader(process.getInputStream()))) {
+        // Use only the first line.
+        result = reader.readLine();
       }
-      return process.waitFor() == 0 ? sb.toString() : null;
+      return process.waitFor() == 0 ? result : null;
     } catch (IOException e) {
       // Log this if/when we adopt logger again. See #40
     } catch (InterruptedException e) {
