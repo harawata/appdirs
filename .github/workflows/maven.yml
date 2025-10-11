@@ -24,5 +24,8 @@ jobs:
       with:
         distribution: 'zulu'
         java-version: ${{ matrix.java }}
+    - name: Run xdg-user-dir on ubuntu
+      if: runner.os == 'Linux'
+      run: xdg-user-dirs-update
     - name: Build with Maven
       run: mvn -B package --file pom.xml
