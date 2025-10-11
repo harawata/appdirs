@@ -14,6 +14,9 @@
 
 package net.harawata.appdirs.impl;
 
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.util.Map;
 
 import net.harawata.appdirs.AppDirs;
@@ -103,7 +106,10 @@ public class UnixAppDirs extends AppDirs {
   @Override
   public String getUserDownloadsDir(String appName, String appVersion,
       String appAuthor) {
-    String dir = getOrDefault(XDG_DOWNLOAD_DIR, buildPath(home(), "/Downloads"));
+    String dir = execXdgUserDir("DOWNLOAD");
+    if (dir == null) {
+      dir = getOrDefault(XDG_DOWNLOAD_DIR, buildPath(home(), "/Downloads"));
+    }
     return buildPath(dir, appName, appVersion);
   }
 
@@ -116,6 +122,28 @@ public class UnixAppDirs extends AppDirs {
   public String getOrDefault(String key, String def) {
     String val = sysEnv.get(key);
     return val == null ? def : val;
+  }
+
+  private String execXdgUserDir(String key) {
+    ProcessBuilder builder = new ProcessBuilder();
+    builder.command("xdg-user-dir", key);
+    builder.redirectErrorStream(true);
+    try {
+      Process process = builder.start();
+      StringBuilder sb = new StringBuilder();
+      // Assuming the default charset.
+      try (Reader reader = new InputStreamReader(process.getInputStream())) {
+        for (int ch; (ch = reader.read()) != -1;) {
+          sb.append((char) ch);
+        }
+      }
+      return process.waitFor() == 0 ? sb.toString() : null;
+    } catch (IOException e) {
+      // Log this if/when we adopt logger again. See #40
+    } catch (InterruptedException e) {
+      Thread.currentThread().interrupt();
+    }
+    return null;
   }
 
   public UnixAppDirs(Map<String, String> sysEnv) {
