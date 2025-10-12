@@ -152,7 +152,7 @@ Shared dir: /srv/myapp/1.2.3
  - Returns XDG_CACHE_HOME for user cache directory.
  - Returns XDG_DATA_DIRS for site data directory.
  - Returns XDG_CONFIG_DIRS for site config directory.
- - Returns XDG_DOWNLOAD_DIR for user downloads directory.
+ - Returns the result of `xdg-user-dir DOWNLOAD` command for user downloads directory. If the command execution failed, it then returns XDG_DOWNLOAD_DIR as a fallback (see #145 ).
 - _appAuthor_ parameter is not used on Unix/Linux.
 - _roaming_ parameter has no effect on Unix/Linux.
 
